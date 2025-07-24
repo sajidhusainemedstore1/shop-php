@@ -132,63 +132,63 @@ class Checkout extends CI_Controller {
     }
 
     public function preview_order() {
-    $user_id = $this->session->userdata('user_id');
-
-    if (!$user_id) {
-        redirect('user/login');
+        $user_id = $this->session->userdata('user_id');
+        
+        if (!$user_id) {
+            redirect('user/login');
+        }
+    
+        $user = $this->user_model->get_user($user_id);
+        $cart_items = $this->cart_model->get_cart_items($user_id);
+    
+        if (empty($cart_items)) {
+            $this->session->set_flashdata('error', 'Your cart is empty.');
+            redirect('shop/cart');
+        }
+    
+        $subtotal = array_sum(array_column($cart_items, 'subtotal'));
+    
+        $coupon = $this->session->userdata('coupon');
+        $discount = isset($coupon['calculated_discount']) ? $coupon['calculated_discount'] : 0;
+        $final_total = max($subtotal - $discount, 0);
+    
+        $wallet_balance = $user['wallet_balance'] ?? 0;
+        $wallet_amount = 0;
+    
+        $use_wallet = $this->session->userdata('use_wallet');
+        if ($use_wallet && $wallet_balance > 0) {
+            $wallet_percentage_row = $this->db->get_where('settings', ['name' => 'Wallet Percentage'])->row();
+            $wallet_percentage = $wallet_percentage_row ? (float)$wallet_percentage_row->value : 0;
+        
+            $max_wallet_use = ($wallet_percentage / 100) * $final_total;
+            $wallet_amount = min($wallet_balance, $max_wallet_use);
+            $final_total -= $wallet_amount;
+        }
+    
+        $delivery_charge = 10;
+        $final_total += $delivery_charge;
+    
+        $address_id = $this->input->post('address_id');
+    
+        if ($address_id) {
+            $address = $this->address_model->get_user_address($address_id);
+        } else {
+            $address = $this->address_model->get_default_address($user_id);
+        }
+    
+        $data = [
+            'user'            => $user,
+            'cart_items'      => $cart_items,
+            'subtotal'        => $subtotal,
+            'discount'        => $discount,
+            'wallet_amount'   => $wallet_amount,
+            'delivery_charge' => $delivery_charge,
+            'final_total'     => $final_total,
+            'address'         => $address
+        ];
+    
+        $this->load->view('user/preview_order', $data);
     }
-
-    $user = $this->user_model->get_user($user_id);
-    $cart_items = $this->cart_model->get_cart_items($user_id);
-
-    if (empty($cart_items)) {
-        $this->session->set_flashdata('error', 'Your cart is empty.');
-        redirect('shop/cart');
-    }
-
-    $subtotal = array_sum(array_column($cart_items, 'subtotal'));
-
-    $coupon = $this->session->userdata('coupon');
-    $discount = isset($coupon['calculated_discount']) ? $coupon['calculated_discount'] : 0;
-    $final_total = max($subtotal - $discount, 0);
-
-    $wallet_balance = $user['wallet_balance'] ?? 0;
-    $wallet_amount = 0;
-
-    $use_wallet = $this->session->userdata('use_wallet');
-    if ($use_wallet && $wallet_balance > 0) {
-        $wallet_percentage_row = $this->db->get_where('settings', ['name' => 'Wallet Percentage'])->row();
-        $wallet_percentage = $wallet_percentage_row ? (float)$wallet_percentage_row->value : 0;
-
-        $max_wallet_use = ($wallet_percentage / 100) * $final_total;
-        $wallet_amount = min($wallet_balance, $max_wallet_use);
-        $final_total -= $wallet_amount;
-    }
-
-    $delivery_charge = 10;
-    $final_total += $delivery_charge;
-
-    $address_id = $this->input->post('address_id');
-
-if ($address_id) {
-    $address = $this->address_model->get_user_address($address_id);
-} else {
-    $address = $this->address_model->get_default_address($user_id);
-}
-
-    $data = [
-        'user'            => $user,
-        'cart_items'      => $cart_items,
-        'subtotal'        => $subtotal,
-        'discount'        => $discount,
-        'wallet_amount'   => $wallet_amount,
-        'delivery_charge' => $delivery_charge,
-        'final_total'     => $final_total,
-        'address'         => $address
-    ];
-
-    $this->load->view('user/preview_order', $data);
-}
 
     public function confirm_preview() {
         $user_id = $this->session->userdata('user_id');

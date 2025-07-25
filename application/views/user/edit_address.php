@@ -23,6 +23,7 @@
 <div class="container">
     <h2>Edit Address</h2>
     <form method="post" action="<?php echo base_url('user/save_address') ?>">
+        <input type="hidden" name="id" value="<?php echo $addresses['id']; ?>">
         <div class="form-group">
             <label>Name</label>
             <input type="text" name="name" value="<?php echo $addresses['name']; ?>" required>

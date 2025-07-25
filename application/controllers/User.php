@@ -174,32 +174,49 @@ class User extends CI_Controller {
     }
     
     public function save_address() {
-        $data = $this->input->post();
-        $data['user_id'] = $this->session->userdata('user_id');
-    
-        if (!empty($data['is_default'])) {
-            $this->db->where('user_id', $data['user_id'])->update('addresses', ['is_default' => 0]);
-        } else {
-            $data['is_default'] = 0;
-        }
-    
+    $user_id = $this->session->userdata('user_id');
+    $id = $this->input->post('id');
+
+    $data = [
+        'user_id' => $user_id,
+        'name' => $this->input->post('name'),
+        'mobile' => $this->input->post('mobile'),
+        'email' => $this->input->post('email'),
+        'address' => $this->input->post('address'),
+        'city' => $this->input->post('city'),
+        'state' => $this->input->post('state'),
+        'pincode' => $this->input->post('pincode'),
+        'is_default' => $this->input->post('is_default') ? 1 : 0
+    ];
+
+    if (!empty($id)) {
+        // Update existing
+        $this->db->where('id', $id);
+        $this->db->where('user_id', $user_id);
+        $this->db->update('addresses', $data);
+        $this->session->set_flashdata('success', 'Address updated successfully.');
+    } else {
+        // Insert new
         $this->db->insert('addresses', $data);
-        redirect('checkout');
+        $this->session->set_flashdata('success', 'Address added successfully.');
     }
+
+    redirect('checkout');
+}
 
     public function edit_address($id) {
-    if (!$this->session->userdata('user_id')) {
-        redirect('checkout');
+        if (!$this->session->userdata('user_id')) {
+            redirect('checkout');
+        }
+    
+        $data['addresses'] = $this->address_model->get_address_by_id($id);
+    
+        if (empty($data['addresses'])) {
+            show_404();
+        }
+    
+        $this->load->view('user/edit_address', $data);
     }
-
-    $data['addresses'] = $this->address_model->get_address_by_id($id);
-
-    if (empty($data['addresses'])) {
-        show_404();
-    }
-
-    $this->load->view('user/edit_address', $data);
-}
 
     public function delete_address($id) {
         $user_id = $this->session->userdata('user_id');

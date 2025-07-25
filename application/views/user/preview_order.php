@@ -99,92 +99,93 @@
 </head>
 <body>
 
-<div class="preview-box">
-    <h2>PREVIEW ORDER</h2>
+    <div class="preview-box">
+        <h2>PREVIEW ORDER</h2>
 
-    <div class="section">
-        <div class="address">
-            <h4>Delivery Address</h4>
-            <p><strong>Name:</strong> <?= !empty($address['name']) ? $address['name'] : '' ?></p>
-            <p><strong>Mobile No:</strong> <?= !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
-            <p><strong>Email:</strong> <?= !empty($address['email']) ? $address['email'] : '' ?></p>
-            <p><strong>Address:</strong>
-                <?php
-                    if (!empty($address)) {
-                        echo $address['address'] . ', ';
-                        echo $address['city'] . ', ';
-                        echo $address['state'] . ' - ';
-                        echo $address['pincode'];
-                    } else {
-                        echo "No default address found.";
-                    }
-                ?>
-            </p>
+        <div class="section">
+            <div class="address">
+                <h4>Delivery Address</h4>
+                <p><strong>Name:</strong> <?= !empty($address['name']) ? $address['name'] : '' ?></p>
+                <p><strong>Mobile No:</strong> <?= !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
+                <p><strong>Email:</strong> <?= !empty($address['email']) ? $address['email'] : '' ?></p>
+                <p><strong>Address:</strong>
+                    <?php
+                        if (!empty($address)) {
+                            echo $address['address'] . ', ';
+                            echo $address['city'] . ', ';
+                            echo $address['state'] . ' - ';
+                            echo $address['pincode'];
+                        } else {
+                            echo "No default address found.";
+                        }
+                    ?>
+                </p>
+            </div>
+            <div class="payment">
+                <h4>Payment Type</h4>
+                <label><input type="radio" name="payment_method" checked> COD</label>
+                <label style="margin-left: 20px;"><input type="radio" name="payment_method"> Pay Online</label>
+            </div>
         </div>
-        <div class="payment">
-            <h4>Payment Type</h4>
-            <label><input type="radio" name="payment_method" checked> COD</label>
-            <label style="margin-left: 20px;"><input type="radio" name="payment_method"> Pay Online</label>
-        </div>
-    </div>
 
-    <table>
-        <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($cart_items)): ?>
+                    <?php foreach ($cart_items as $item): ?>
+                        <tr>
+                            <td><?php echo $item['name'] ?></td>
+                            <td><?php echo $item['qty'] ?></td>
+                            <td>₹<?php echo number_format($item['price'], 2) ?></td>
+                            <td>₹<?php echo number_format($item['subtotal'], 2) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+
+        <table class="summary">
             <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <td>Sub Total:</td>
+                <td>Rs <?php echo number_format($subtotal, 2) ?></td>
             </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($cart_items)): ?>
-                <?php foreach ($cart_items as $item): ?>
-                    <tr>
-                        <td><?php echo $item['name'] ?></td>
-                        <td><?php echo $item['qty'] ?></td>
-                        <td>₹<?php echo number_format($item['price'], 2) ?></td>
-                        <td>₹<?php echo number_format($item['subtotal'], 2) ?></td>
-                    </tr>
-                <?php endforeach; ?>
+
+            <?php if (isset($discount) && $discount > 0): ?>
+            <tr>
+                <td>Promocode Discount Price:</td>
+                <td>- Rs <?php echo number_format($discount, 2) ?></td>
+            </tr>
             <?php endif; ?>
-        </tbody>
-    </table>
 
-    <table class="summary">
-        <tr>
-            <td>Sub Total:</td>
-            <td>Rs <?php echo number_format($subtotal, 2) ?></td>
-        </tr>
+            <?php if ($this->session->userdata('use_wallet') && isset($wallet_amount) && $wallet_amount > 0): ?>
+            <tr>
+                <td>Wallet Used:</td>
+                <td>- Rs <?php echo number_format($wallet_amount, 2); ?></td>
+            </tr>
+            <?php endif; ?>
 
-        <?php if (isset($discount) && $discount > 0): ?>
-        <tr>
-            <td>Promocode Discount Price:</td>
-            <td>- Rs <?php echo number_format($discount, 2) ?></td>
-        </tr>
-        <?php endif; ?>
+            <tr>
+                <td>Delivery Charges:</td>
+                <td>+ Rs <?php echo number_format($delivery_charge ?? 0, 2) ?></td>
+            </tr>
+            <tr class="total-row">
+                <td>Total Amount:</td>
+                <td>Rs <?php echo number_format($final_total, 2) ?></td>
+            </tr>
+        </table>
 
-        <?php if ($this->session->userdata('use_wallet') && isset($wallet_amount) && $wallet_amount > 0): ?>
-        <tr>
-            <td>Wallet Used:</td>
-            <td>- Rs <?php echo number_format($wallet_amount, 2); ?></td>
-        </tr>
-        <?php endif; ?>
+        <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
+            <button class="btn-confirm">Confirm Order</button>
+        </form>
 
-        <tr>
-            <td>Delivery Charges:</td>
-            <td>+ Rs <?php echo number_format($delivery_charge ?? 0, 2) ?></td>
-        </tr>
-        <tr class="total-row">
-            <td>Total Amount:</td>
-            <td>Rs <?php echo number_format($final_total, 2) ?></td>
-        </tr>
-    </table>
-
-    <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
-        <button class="btn-confirm">Confirm Order</button>
-    </form>
-
-</div>
+    </div>
+    
 </body>
 </html>

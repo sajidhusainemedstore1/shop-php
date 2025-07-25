@@ -31,7 +31,7 @@ class Checkout extends CI_Controller {
             'addresses'     => $addresses,
             'address'       => $address,
             'cart'          => $cart,
-            'sub_total'         => $sub_total,
+            'sub_total'     => $sub_total,
             'wallet_amount' => $wallet_amount,
             'final_total'   => $final_total,
         ];

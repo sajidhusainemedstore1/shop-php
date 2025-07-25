@@ -108,7 +108,6 @@
                         <a href="<?php echo base_url('wallet/edit/' . $user['id']) ?>" title="Edit">✏️</a>
                         <a href="<?php echo base_url('wallet/view/' . $user['id']) ?>" title="View">🔍</a>
                     </td>
-
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

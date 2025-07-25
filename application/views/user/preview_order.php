@@ -187,15 +187,4 @@
 
 </div>
 </body>
-<script>
-document.getElementById("confirm-order-form").addEventListener("submit", function (e) {
-    e.preventDefault(); 
-
-    const useWallet = document.getElementById("wallet_checkbox").checked ? 1 : 0;
-
-    $.post("<?php echo base_url('checkout/confirm_preview') ?>", { use_wallet: useWallet }, function () {
-        document.getElementById("confirm-order-form").submit();
-    });
-});
-</script>
 </html>

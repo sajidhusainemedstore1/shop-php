@@ -208,20 +208,20 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
-            foreach ($items as $item): 
-                $subtotal = $item['qty'] * $item['price'];
-                $total += $subtotal;
-        ?>
+            <?php 
+                foreach ($items as $item): 
+                    $subtotal = $item['qty'] * $item['price'];
+                    $total += $subtotal;
+            ?>
             <tr>
                 <td><?php echo $item['name'] ?></td>
                 <td><?php echo $item['qty'] ?></td>
                 <td>₹<?php echo number_format($item['price'], 2) ?></td>
                 <td>₹<?php echo number_format($subtotal, 2) ?></td>
             </tr>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         </tbody>
-        <tfoot> 
+        <tfoot>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
                 <td>₹<?= number_format($total, 2) ?></td>

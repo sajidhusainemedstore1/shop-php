@@ -341,17 +341,18 @@ class Admin extends CI_Controller {
     }
 
     public function order_detail($order_id) {
-
         $order = $this->order_model->get_order_by_id($order_id);
         $items = $this->order_model->get_order_items($order_id);
-
+        
         if (!$order) {
             show_404();
         }
-
+    
         $data['order'] = $order;
         $data['items'] = $items;
-
+    
+        $data['show_buttons'] = (isset($order['return_status']) && $order['return_status'] === 'requested');
+    
         $this->load->view('admin/order_detail', $data);
     }
 
@@ -558,6 +559,25 @@ class Admin extends CI_Controller {
         $this->db->delete('coupons', ['code' => $code]);
         $this->session->set_flashdata('success', 'Coupon deleted successfully!');
         redirect('admin/coupons');
+    }
+
+    public function approve_return($order_id) {
+        $this->db->where('id', $order_id);
+        $this->db->update('orders', ['return_status' => 'approved']);
+        $this->session->set_flashdata('success', 'Return approved.');
+        redirect('admin/order_detail/' . $order_id);
+    }
+
+    public function cancel_return($order_id) {
+        $this->db->where('id', $order_id);
+        $this->db->update('orders', ['return_status' => 'cancelled']);
+        $this->session->set_flashdata('success', 'Return cancelled.');
+        redirect('admin/order_detail/' . $order_id);
+    }
+
+    public function update_item_return_status($item_id, $status) {
+        $this->db->where('id', $item_id);
+        return $this->db->update('order_items', ['return_status' => $status]);
     }
 
 }

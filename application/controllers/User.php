@@ -230,4 +230,20 @@ class User extends CI_Controller {
         redirect('checkout');
     }
 
+    public function return_order() {
+        $selected_items = $this->input->post('return_items');
+        
+        if (!empty($selected_items)) {
+            foreach ($selected_items as $item_id) {
+                // mark as returned or insert into a returns table
+                // $this->Order_model->mark_item_returned($item_id);
+            }
+            $this->session->set_flashdata('success', 'Return request submitted.');
+        } else {
+            $this->session->set_flashdata('error', 'No items selected.');
+        }
+    
+        redirect('user/my_orders');
+    }
+
 }

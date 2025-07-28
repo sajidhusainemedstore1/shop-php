@@ -191,13 +191,12 @@
     <?php if (empty($items)): ?>
         <p>Order details not available.</p>
     <?php else: ?>
-        <?php
-            $total = $order['total'];
+        <?php 
+            $total = 0;
             $discount = isset($order['dis_amount']) ? $order['dis_amount'] : 0;
-            $wallet = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
-            $final_total = $total - $discount - $wallet;
+            $wallet_used = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
+            $grand_total = max($order['total'], 0);
         ?>
-
     <table>
         <thead>
             <tr>
@@ -209,9 +208,9 @@
         </thead>
         <tbody>
             <?php 
-                foreach ($items as $item): 
-                    $subtotal = $item['qty'] * $item['price'];
-                    $total += $subtotal;
+            foreach ($items as $item): 
+                $subtotal = $item['qty'] * $item['price'];
+                $total += $subtotal;
             ?>
             <tr>
                 <td><?php echo $item['name'] ?></td>
@@ -222,6 +221,12 @@
             <?php endforeach; ?>
         </tbody>
         <tfoot>
+            <?php
+                $total = $order['total'];
+                $discount = isset($order['dis_amount']) ? $order['dis_amount'] : 0;
+                $wallet = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
+                $final_total = $total - $discount - $wallet;
+            ?>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
                 <td>₹<?= number_format($total, 2) ?></td>

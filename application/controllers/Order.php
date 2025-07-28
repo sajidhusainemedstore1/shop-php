@@ -30,6 +30,11 @@ class Order extends CI_Controller {
             'coupon_code' => $data['order']['coupon_code']
         ];
 
+        $data['show_buttons'] = (
+            isset($data['order']['return_status']) && 
+            $data['order']['return_status'] === 'requested'
+        );
+
         $this->load->view('order_receipt', $data);
     }
 

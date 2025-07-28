@@ -104,6 +104,36 @@
         font-weight: 500;
     }
 
+    .btn-action {
+        display: inline-block;
+        padding: 10px 18px;
+        margin-top: 20px;
+        margin-right: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-approve {
+        background-color: #28a745; /* Green */
+    }
+    
+    .btn-approve:hover {
+        background-color: #218838;
+    }
+    
+    .btn-cancel {
+        background-color: #dc3545; /* Red */
+    }
+    
+    .btn-cancel:hover {
+        background-color: #c82333;
+    }
+    
     .back-link:hover {
         text-decoration: underline;
     }
@@ -141,6 +171,15 @@
 </style>
 </head>
 <body>
+    <?php if ($this->session->flashdata('success')): ?>
+        <p style="color: green;"><?php echo $this->session->flashdata('success'); ?></p>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('error')): ?>
+        <p style="color: red;"><?php echo $this->session->flashdata('error'); ?></p>
+    <?php endif; ?>
+
+    <?php $return_status = isset($order['return_status']) ? $order['return_status'] : 'none'; ?>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <h2>ORDER RECEIPT</h2>
     <p><strong>Receipt No:</strong> <?php echo $order['id'] ?></h2></p>
@@ -181,7 +220,6 @@
             </tr>
         <?php endforeach; ?>
         </tbody>
-        
         <tfoot>
             <tr class="total-row">
                 <td colspan="3"><strong>Total:</strong></td>
@@ -200,8 +238,18 @@
     </table>
     <div class="clearfix">
         <a href="<?php echo base_url('admin/invoice/' . $order['id']) ?>" target="_blank" class="btn invoice-link">Print (PDF)</a>
+
+        <?php if ($show_buttons): ?>
+            <form method="post" action="<?= base_url('admin/approve_return/' . $order['id']) ?>" style="display:inline;">
+                <button type="submit" class="btn-action btn-approve">Approve Return</button>
+            </form>
+
+            <form method="post" action="<?= base_url('admin/cancel_return/' . $order['id']) ?>" style="display:inline;">
+                <button type="submit" class="btn-action btn-cancel">Cancel Return</button>
+            </form>
+        <?php endif; ?>
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 </body>
 </html>
 <?php $this->load->view("admin/footer"); ?>

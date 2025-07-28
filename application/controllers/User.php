@@ -230,19 +230,24 @@ class User extends CI_Controller {
         redirect('checkout');
     }
 
-    public function return_order() {
-        $selected_items = $this->input->post('return_items');
-        
-        if (!empty($selected_items)) {
-            foreach ($selected_items as $item_id) {
-                // mark as returned or insert into a returns table
-                // $this->Order_model->mark_item_returned($item_id);
-            }
-            $this->session->set_flashdata('success', 'Return request submitted.');
-        } else {
-            $this->session->set_flashdata('error', 'No items selected.');
+    public function return_order($order_id) {
+        if (!$order_id || !is_numeric($order_id)) {
+            show_error('Invalid order ID');
         }
     
+        $this->db->where('id', $order_id)->update('orders', ['return_status' => 'requested']);
+        $this->session->set_flashdata('success', 'Return request submitted.');
+        redirect('user/my_orders');
+    }
+
+    public function request_return($order_id) {
+        $this->db->where('order_id', $order_id);
+        $this->db->update('order_items', ['return_status' => 'requested']);
+
+        $this->db->where('id', $order_id);
+        $this->db->update('orders', ['return_status' => 'requested']);
+
+        $this->session->set_flashdata('success', 'Return request submitted.');
         redirect('user/my_orders');
     }
 

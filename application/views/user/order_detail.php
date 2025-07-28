@@ -88,75 +88,91 @@
     </style>
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<h2>ORDER RECEIPT</h2>
-<p><strong>Receipt No:</strong> <?php echo $order['id'] ?></p>
-<p><strong>User:</strong> <?php echo $order['fullname'] ?></p>
-<p><strong>Order Date:</strong> <?php echo date('d M Y', strtotime($order['created_at'])) ?></p>
-<p><strong>Total:</strong> ₹<?php echo number_format($order['total'], 2) ?></p>
+    <h2>ORDER RECEIPT</h2>
+    <p><strong>Receipt No:</strong> <?php echo $order['id'] ?></p>
+    <p><strong>User:</strong> <?php echo $order['fullname'] ?></p>
+    <p><strong>Order Date:</strong> <?php echo date('d M Y', strtotime($order['created_at'])) ?></p>
+    <p><strong>Total:</strong> ₹<?php echo number_format($order['total'], 2) ?></p>
 
-<h2>Order Details</h2>
+    <h2>Order Details</h2>
+    <form method="post" action="<?php echo base_url('user/return_order'); ?>">
 
-<?php if (empty($items)): ?>
-    <p>Order details not available.</p>
-<?php else: ?>
-    <?php 
-        $total = 0;
-        $discount = isset($order['dis_amount']) ? $order['dis_amount'] : 0;
-        $wallet_used = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
-        foreach ($items as $item) {
-            $total += $item['qty'] * $item['price'];
-        }
-        $grand_total = max($total - $discount - $wallet_used, 0);
-    ?>
+    <?php if (empty($items)): ?>
+        <p>Order details not available.</p>
+    <?php else: ?>
+        <?php 
+            $total = 0;
+            $discount = isset($order['dis_amount']) ? $order['dis_amount'] : 0;
+            $wallet_used = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
+            foreach ($items as $item) {
+                $total += $item['qty'] * $item['price'];
+            }
+            $grand_total = max($total - $discount - $wallet_used, 0);
+        ?>
 
-    <a href="<?php echo base_url('user/my_orders') ?>" class="back-link">← My Orders</a>
+        <a href="<?php echo base_url('user/my_orders') ?>" class="back-link">← My Orders</a>
+        <div>
+            <button type="submit">Return Selected Items</button>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($items as $item): ?>
-            <tr>
-                <td><?php echo $item['name'] ?></td>
-                <td><?php echo $item['qty'] ?></td>
-                <td>₹<?php echo number_format($item['price'], 2) ?></td>
-                <td>₹<?php echo number_format($item['qty'] * $item['price'], 2) ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-        <tfoot>
-            <tr class="total-row">
-                <td colspan="3"><strong>Total:</strong></td>
-                <td><strong>₹<?php echo number_format($total, 2); ?></strong></td>
-            </tr>
-            <tr class="total-row">
-                <td colspan="3"><strong>Discount:</strong></td>
-                <td><strong>- ₹<?php echo number_format($discount, 2); ?></strong></td>
-            </tr>
-            <tr class="total-row">
-                <td colspan="3"><strong>Wallet used:</strong></td>
-                <td><strong>- ₹<?php echo number_format($wallet_used, 2); ?></strong></td>
-            </tr>
-            <tr class="total-row">
-                <td colspan="3"><strong>Grand Total:</strong></td>
-                <td><strong>₹<?php echo number_format($grand_total, 2); ?></strong></td>
-            </tr>
-        </tfoot>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select_all"> All</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($items as $item): ?>
+                <tr>
+                    <td><input type="checkbox" name="return_items[]" value="<?php echo $item['id']; ?>"></td>
+                    <td><?php echo $item['name'] ?></td>
+                    <td><?php echo $item['qty'] ?></td>
+                    <td>₹<?php echo number_format($item['price'], 2) ?></td>
+                    <td>₹<?php echo number_format($item['qty'] * $item['price'], 2) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td></td>
+                    <td colspan="3"><strong>Total:</strong></td>
+                    <td><strong>₹<?php echo number_format($total, 2); ?></strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td></td>
+                    <td colspan="3"><strong>Discount:</strong></td>
+                    <td><strong>- ₹<?php echo number_format($discount, 2); ?></strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td></td>
+                    <td colspan="3"><strong>Wallet used:</strong></td>
+                    <td><strong>- ₹<?php echo number_format($wallet_used, 2); ?></strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td></td>
+                    <td colspan="3"><strong>Grand Total:</strong></td>
+                    <td><strong>₹<?php echo number_format($grand_total, 2); ?></strong></td>
+                </tr>
+            </tfoot>
+        </table>
 
-    <div style="text-align: right; margin-top: 20px;">
-        <button onclick="downloadPDF()">Download PDF</button>
-    </div>
-
-    <script>
+        <div style="text-align: right; margin-top: 20px;">
+            <button onclick="downloadPDF()">Download PDF</button>
+        </div>
+    </form>       
+<script>
+    document.getElementById('select_all').addEventListener('change', function () {
+        let checkboxes = document.querySelectorAll('input[name="return_items[]"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
     async function downloadPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -234,7 +250,7 @@
         doc.text(`Total: ${rupee}${total.toFixed(2)}`, 15, y);
         doc.save(`Order_Receipt_<?php echo $order['id']; ?>.pdf`);
     }
-    </script>
+</script>
 <?php endif; ?>
 
 </body>

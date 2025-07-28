@@ -171,6 +171,7 @@
 </style>
 </head>
 <body>
+    <a href="<?php echo base_url('admin/order_list') ?>" class="back-link"> My Orders</a>
     <?php if ($this->session->flashdata('success')): ?>
         <p style="color: green;"><?php echo $this->session->flashdata('success'); ?></p>
     <?php endif; ?>
@@ -190,15 +191,15 @@
     <?php if (empty($items)): ?>
         <p>Order details not available.</p>
     <?php else: ?>
-        <?php 
-            $total = 0;
+        <?php
+            $total = $order['total'];
             $discount = isset($order['dis_amount']) ? $order['dis_amount'] : 0;
-            $grand_total = $total - $discount;
+            $wallet = isset($order['wallet_used']) ? $order['wallet_used'] : 0;
+            $final_total = $total - $discount - $wallet;
         ?>
 
     <table>
         <thead>
-        <a href="<?php echo base_url('admin/order_list') ?>" class="back-link"> My Orders</a>
             <tr>
                 <th>Product</th>
                 <th>Qty</th>
@@ -208,9 +209,9 @@
         </thead>
         <tbody>
         <?php 
-        foreach ($items as $item): 
-            $subtotal = $item['qty'] * $item['price'];
-            $total += $subtotal;
+            foreach ($items as $item): 
+                $subtotal = $item['qty'] * $item['price'];
+                $total += $subtotal;
         ?>
             <tr>
                 <td><?php echo $item['name'] ?></td>
@@ -220,31 +221,34 @@
             </tr>
         <?php endforeach; ?>
         </tbody>
-        <tfoot>
-            <tr class="total-row">
-                <td colspan="3"><strong>Total:</strong></td>
-                <td><strong>₹<?php echo number_format($total, 2); ?></strong></td>
+        <tfoot> 
+            <tr>
+                <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
+                <td>₹<?= number_format($total, 2) ?></td>
             </tr>
-            <tr class="total-row">
-                <td colspan="3"><strong>Discount:</strong></td>
-                <td><strong>₹<?php echo number_format($discount, 2); ?></strong></td>
+            <tr>
+                <td colspan="3" style="text-align:right;"><strong>Discount:</strong></td>
+                <td>- ₹<?= number_format($discount, 2) ?></td>
             </tr>
-            <tr class="total-row">
-                <td colspan="3"><strong>Grand Total:</strong></td>
-                <td><strong>₹<?php echo number_format($order['total'], 2) ?></strong></td>
+            <tr>
+                <td colspan="3" style="text-align:right;"><strong>Wallet used:</strong></td>
+                <td>- ₹<?= number_format($wallet, 2) ?></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:right;"><strong>Grand Total:</strong></td>
+                <td><strong>₹<?= number_format($final_total, 2) ?></strong></td>
             </tr>
         </tfoot>
-
     </table>
     <div class="clearfix">
         <a href="<?php echo base_url('admin/invoice/' . $order['id']) ?>" target="_blank" class="btn invoice-link">Print (PDF)</a>
 
         <?php if ($show_buttons): ?>
-            <form method="post" action="<?= base_url('admin/approve_return/' . $order['id']) ?>" style="display:inline;">
+            <form method="post" action="<?php echo base_url('admin/approve_return/' . $order['id']) ?>" style="display:inline;">
                 <button type="submit" class="btn-action btn-approve">Approve Return</button>
             </form>
 
-            <form method="post" action="<?= base_url('admin/cancel_return/' . $order['id']) ?>" style="display:inline;">
+            <form method="post" action="<?php echo base_url('admin/cancel_return/' . $order['id']) ?>" style="display:inline;">
                 <button type="submit" class="btn-action btn-cancel">Cancel Return</button>
             </form>
         <?php endif; ?>

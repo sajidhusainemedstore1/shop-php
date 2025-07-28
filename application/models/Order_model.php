@@ -6,7 +6,7 @@ class Order_model extends CI_Model {
     }
 
     public function get_order_by_id($order_id) {
-        $this->db->select('o.id, o.total, o.created_at, o.coupon_code, o.dis_amount, o.return_status, u.fullname');
+        $this->db->select('o.id, o.total, o.created_at, o.coupon_code, o.dis_amount, o.return_status, o.wallet_used, u.fullname');
         $this->db->from('orders o');
         $this->db->join('user u', 'o.user_id = u.id');
         $this->db->where('o.id', $order_id);
@@ -35,7 +35,7 @@ class Order_model extends CI_Model {
     
     public function update_return_status_by_order($order_id, $status) {
         $this->db->where('order_id', $order_id);
-        $this->db->where('return_status', 1); // only pending returns
+        $this->db->where('return_status', 1);
         $this->db->update('order_items', ['return_status' => $status]);
     }
 

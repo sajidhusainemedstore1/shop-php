@@ -114,9 +114,11 @@
             <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
+    <a href="<?php echo base_url('admin/re_order') ?>">
+        <button type="button">Re-order</button>
+    </a>
 
     <h2>Order Details</h2>
-    <form method="post" action="<?php echo base_url('user/return_order'); ?>">
 
     <?php if (empty($items)): ?>
         <p>Order details not available.</p>

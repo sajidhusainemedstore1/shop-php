@@ -146,6 +146,7 @@ p {
                 <th>Order ID</th>
                 <th>Total</th>
                 <th>Date</th>
+                <th>Status</th>
                 <th>Order Details</th>
             </tr>
         </thead>
@@ -155,6 +156,25 @@ p {
                 <td><?php echo $order['id'] ?></td>
                 <td>₹<?php echo number_format($order['paid_amount'], 2) ?></td>
                 <td><?php echo date('d M Y H:i A', strtotime($order['created_at'])) ?></td>
+                <td>
+                    <?php if (isset($order['return_status'])): ?>
+                        <?php if ($order['return_status'] === 'approved'): ?>
+                            <div style="background: #1d8b35ff; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                                Your return request approved.
+                            </div>
+                            <?php if (!empty($order['return_approve_comment'])): ?>
+                                <div style="margin-top: 5px;">Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
+                            <?php endif; ?>
+                        <?php elseif ($order['return_status'] === 'cancelled'): ?>
+                            <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                                Your return Request Cancelled.
+                            </div>
+                            <?php if (!empty($order['return_cancel_comment'])): ?>
+                                <div style="margin-top: 5px;">Cancelled Comment: <?php echo htmlspecialchars($order['return_cancel_comment']) ?></div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
                 <td>
                 <a href="<?php echo base_url('user/view_order/' . $order['id']) ?>" class="btn btn-primary">View Details</a>
                 </td>

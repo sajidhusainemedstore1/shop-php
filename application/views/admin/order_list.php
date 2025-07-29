@@ -147,6 +147,7 @@
                     <th>Username</th>
                     <th>Total (₹)</th>
                     <th>Order Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -158,6 +159,25 @@
                             <td data-label="Username"><?php echo $order['fullname'] ?></td>
                             <td data-label="Total (₹)"><?php echo number_format($order['total'], 2) ?></td>
                             <td data-label="Order Date"><?php echo date('d M Y', strtotime($order['created_at'])) ?></td>
+                            <td>
+                                <?php if (isset($order['return_status'])): ?>
+                                    <?php if ($order['return_status'] === 'approved'): ?>
+                                        <div style="background: #1d8b35ff; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                                            Your return request approved.
+                                        </div>
+                                        <?php if (!empty($order['return_approve_comment'])): ?>
+                                            <div style="margin-top: 5px;">Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
+                                        <?php endif; ?>
+                                    <?php elseif ($order['return_status'] === 'cancelled'): ?>
+                                        <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                                            Your return Request Cancelled.
+                                        </div>
+                                        <?php if (!empty($order['return_cancel_comment'])): ?>
+                                            <div style="margin-top: 5px;">Cancelled Comment: <?php echo htmlspecialchars($order['return_cancel_comment']) ?></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </td>
                             <td data-label="Action">
                                 <a href="<?php echo base_url('admin/order_detail/' . $order['id']) ?>">View</a>
                             </td>

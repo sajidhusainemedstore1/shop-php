@@ -580,4 +580,11 @@ class Admin extends CI_Controller {
         return $this->db->update('order_items', ['return_status' => $status]);
     }
 
+    public function deliverd_order() {
+        
+    }
+
+    public function cancel_order() {
+
+    }
 }

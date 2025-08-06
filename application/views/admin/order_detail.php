@@ -246,6 +246,8 @@
         </tfoot>
     </table>
     <div class="clearfix">
+        <a href="<?php echo base_url('admin/deliverd_order') ?>" class="btn">Deliver</a>
+        <a href="<?php echo base_url('admin/cancel_order') ?>" class="btn">Cancel_order</a>
         <a href="<?php echo base_url('admin/invoice/' . $order['id']) ?>" target="_blank" class="btn invoice-link">Print (PDF)</a>
 
         <?php if ($show_buttons): ?>

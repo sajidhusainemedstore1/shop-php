@@ -155,7 +155,7 @@
                 <?php if(!empty($orders)): ?>
                     <?php foreach($orders as $order): ?>
                         <tr>
-                           <td data-label="Receipt No"><?php echo $order['id'] ?></td>
+                            <td data-label="Receipt No"><?php echo $order['id'] ?></td>
                             <td data-label="Username"><?php echo $order['fullname'] ?></td>
                             <td data-label="Total (₹)"><?php echo number_format($order['total'], 2) ?></td>
                             <td data-label="Order Date"><?php echo date('d M Y', strtotime($order['created_at'])) ?></td>

@@ -229,19 +229,19 @@
             ?>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
-                <td>₹<?= number_format($total, 2) ?></td>
+                <td>₹<?php echo number_format($total, 2) ?></td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Discount:</strong></td>
-                <td>- ₹<?= number_format($discount, 2) ?></td>
+                <td>- ₹<?php echo number_format($discount, 2) ?></td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Wallet used:</strong></td>
-                <td>- ₹<?= number_format($wallet, 2) ?></td>
+                <td>- ₹<?php echo number_format($wallet, 2) ?></td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right;"><strong>Grand Total:</strong></td>
-                <td><strong>₹<?= number_format($final_total, 2) ?></strong></td>
+                <td><strong>₹<?php echo number_format($final_total, 2) ?></strong></td>
             </tr>
         </tfoot>
     </table>

@@ -52,6 +52,7 @@ class Wallet extends CI_Controller {
             redirect('admin/login');
         }
     }
+    
     public function view($user_id) {
         $data['user'] = $this->user_model->get_user($user_id);
         $data['transactions'] = $this->wallet_model->get_transactions($user_id);

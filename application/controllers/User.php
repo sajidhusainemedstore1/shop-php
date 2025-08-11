@@ -251,4 +251,7 @@ class User extends CI_Controller {
         redirect('user/my_orders');
     }
 
+    public function re_order() {
+        
+    }
 }

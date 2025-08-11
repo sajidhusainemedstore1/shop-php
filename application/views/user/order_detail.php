@@ -114,7 +114,7 @@
             <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
-    <a href="<?php echo base_url('admin/re_order') ?>">
+    <a href="<?php echo base_url('user/re_order') ?>">
         <button type="button">Re-order</button>
     </a>
 

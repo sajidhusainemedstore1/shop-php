@@ -39,10 +39,32 @@ class Checkout extends CI_Controller {
         $this->load->view('user/checkout', $data);
     }
 
-    // public function place_order() {
-    //     // You can handle payment logic here
-    //     // Save order to `orders` table and redirect to success
-    // }
+    public function place_order() {
+        $user_id = $this->session->userdata('user_id');
+        $payment_method = $this->input->post('payment_method'); // COD / Online
+        
+        $order_data = [
+            'user_id'        => $user_id,
+            'total'          => $this->cart->total(),
+            'coupon_code'    => $this->session->userdata('coupon_code'),
+            'dis_amount'     => $this->session->userdata('discount'),
+            'wallet_used'    => $this->session->userdata('wallet_used'),
+            'paid_amount'    => $this->session->userdata('final_total'),
+            'payment_method' => $payment_method,   // ✅ Now will be COD or Online
+            'status'         => 'pending',
+            'created_at'     => date('Y-m-d H:i:s'),
+        ];
+        
+        $this->db->insert('orders', $order_data);
+        $order_id = $this->db->insert_id();
+    
+        // Redirect to thank you / payment gateway
+        if ($payment_method == 'Online') {
+            redirect('payment_gateway/start/'.$order_id);
+        } else {
+            redirect('checkout/thank_you/'.$order_id);
+        }
+    }
 
     public function apply_coupon() {
         $user_id = $this->session->userdata('user_id');

@@ -145,7 +145,8 @@
                 <tr>
                     <th>Receipt No</th>
                     <th>Username</th>
-                    <th>Total (₹)</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
                     <th>Order Date</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -157,7 +158,8 @@
                         <tr>
                             <td data-label="Receipt No"><?php echo $order['id'] ?></td>
                             <td data-label="Username"><?php echo $order['fullname'] ?></td>
-                            <td data-label="Total (₹)"><?php echo number_format($order['total'], 2) ?></td>
+                            <td data-label="Payment Method"><?php echo $order['payment_method'] ?></td>
+                            <td data-label="Payment Status"><?php echo $order['status']  ?></td>
                             <td data-label="Order Date"><?php echo date('d M Y', strtotime($order['created_at'])) ?></td>
                             <td>
                                 <?php if (isset($order['return_status'])): ?>

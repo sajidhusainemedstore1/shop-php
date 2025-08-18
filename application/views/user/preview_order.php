@@ -123,8 +123,12 @@
             </div>
             <div class="payment">
                 <h4>Payment Type</h4>
-                <label><input type="radio" name="payment_method" checked> COD</label>
-                <label style="margin-left: 20px;"><input type="radio" name="payment_method"> Pay Online</label>
+                <label>
+                    <input type="radio" name="payment_method" value="COD" checked> COD
+                </label>
+                <label style="margin-left: 20px;">
+                    <input type="radio" name="payment_method" value="Online"> Pay Online
+                </label>
             </div>
         </div>
 

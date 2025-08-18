@@ -218,16 +218,22 @@ class Shop extends CI_Controller {
             }
         }
 
+        $payment_method = $this->input->post('payment_method');
+
+        if (!$payment_method) {
+            $payment_method = 'COD';
+        }
+
         $order_data = [
-            'user_id' => $user_id,
-            'total' => $total,
-            'dis_amount' => $discount,
-            'wallet_used' => $wallet_used,
-            'paid_amount' => $final_total,
-            'payment_method' => $final_total == 0 ? 'wallet' : 'pending', 
-            'coupon_code' => $coupon['code'] ?? NULL,
-            'status' => ($final_total == 0 ? 'paid' : 'pending'),
-            'created_at' => date('Y-m-d H:i:s')
+            'user_id'        => $user_id,
+            'total'          => $total,
+            'dis_amount'     => $discount,
+            'wallet_used'    => $wallet_used,
+            'paid_amount'    => $final_total,
+            'payment_method' => ($final_total == 0 ? 'wallet' : $payment_method),
+            'coupon_code'    => $coupon['code'] ?? NULL,
+            'status'         => ($final_total == 0 ? 'paid' : 'pending'),
+            'created_at'     => date('Y-m-d H:i:s')
         ];
 
         $this->db->insert('orders', $order_data);

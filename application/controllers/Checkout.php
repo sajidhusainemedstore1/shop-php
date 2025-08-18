@@ -206,9 +206,10 @@ class Checkout extends CI_Controller {
             'wallet_amount'   => $wallet_amount,
             'delivery_charge' => $delivery_charge,
             'final_total'     => $final_total,
-            'address'         => $address
+            'address'         => $address,
+            'all_addresses'   => $this->address_model->get_addresses($user_id) // ✅ Added
         ];
-    
+
         $this->load->view('user/preview_order', $data);
     }
 

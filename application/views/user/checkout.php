@@ -350,7 +350,14 @@
       </div>
 
       <div class="summary-section">
-        <a href="<?php echo base_url('checkout/preview_order') ?>" class="btn-preview">Preview Order</a>
+        <form action="<?php echo base_url('checkout/preview_order'); ?>" method="post">
+          <!-- Hidden fields for wallet + prescription + delivery type -->
+          <input type="hidden" name="prescription" value="">
+          <input type="hidden" name="delivery_type" value="">
+          <input type="hidden" name="use_wallet" value="<?php echo $this->session->userdata('use_wallet') ? 1 : 0; ?>">
+
+          <button type="submit" class="btn-preview">Preview Order</button>
+        </form>
       </div>
     </div>
   </div>
@@ -382,6 +389,25 @@
           $.post("<?php echo base_url('checkout/confirm_preview') ?>", { use_wallet: status });
         }
       }
+      document.querySelector("form[action$='preview_order']").addEventListener("submit", function(e) {
+        // set selected prescription
+        let presc = document.querySelector("input[name='prescription']:checked");
+        this.querySelector("input[name='prescription']").value = presc ? presc.value : "";
+            
+        // set selected delivery type
+        let del = document.querySelector("input[name='delivery_type']:checked");
+        this.querySelector("input[name='delivery_type']").value = del ? del.value : "";
+            
+        // set selected address_id
+        let addr = document.querySelector("input[name='address_id']:checked");
+        if (addr) {
+          let hiddenAddr = document.createElement("input");
+          hiddenAddr.type = "hidden";
+          hiddenAddr.name = "address_id";
+          hiddenAddr.value = addr.value;
+          this.appendChild(hiddenAddr);
+        }
+      });
     });
   </script>
 </body>

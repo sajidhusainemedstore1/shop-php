@@ -145,6 +145,7 @@ p {
             <tr>
                 <th>Order ID</th>
                 <th>Total</th>
+                <th>Payment Status</th>
                 <th>Date</th>
                 <th>Status</th>
                 <th>Order Details</th>
@@ -155,6 +156,7 @@ p {
             <tr>
                 <td><?php echo $order['id'] ?></td>
                 <td>₹<?php echo number_format($order['paid_amount'], 2) ?></td>
+                <td><?php echo $order['status'] ?></td>
                 <td><?php echo date('d M Y H:i A', strtotime($order['created_at'])) ?></td>
                 <td>
                     <?php if (isset($order['return_status'])): ?>

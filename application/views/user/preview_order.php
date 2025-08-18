@@ -11,7 +11,7 @@
         }
 
         .preview-box {
-            background: white;
+            background: #fff;
             padding: 30px;
             border-radius: 10px;
             max-width: 900px;
@@ -62,11 +62,11 @@
         .btn-confirm {
             margin-top: 30px;
             display: block;
-            width: 20%;
+            width: 200px;
             padding: 12px;
             font-size: 16px;
             background-color: #007bff;
-            color: white;
+            color: #fff;
             border: none;
             border-radius: 6px;
             cursor: pointer;
@@ -99,28 +99,27 @@
 </head>
 <body>
 
-    <div class="preview-box">
-        <h2>PREVIEW ORDER</h2>
+<div class="preview-box">
+    <h2>PREVIEW ORDER</h2>
 
+    <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
         <div class="section">
+            <!-- Address Section -->
             <div class="address">
                 <h4>Delivery Address</h4>
-                <p><strong>Name:</strong> <?= !empty($address['name']) ? $address['name'] : '' ?></p>
-                <p><strong>Mobile No:</strong> <?= !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
-                <p><strong>Email:</strong> <?= !empty($address['email']) ? $address['email'] : '' ?></p>
+                <p><strong>Name:</strong> <?php echo !empty($address['name']) ? $address['name'] : '' ?></p>
+                <p><strong>Mobile No:</strong> <?php echo !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
+                <p><strong>Email:</strong> <?php echo !empty($address['email']) ? $address['email'] : '' ?></p>
                 <p><strong>Address:</strong>
-                    <?php
-                        if (!empty($address)) {
-                            echo $address['address'] . ', ';
-                            echo $address['city'] . ', ';
-                            echo $address['state'] . ' - ';
-                            echo $address['pincode'];
-                        } else {
-                            echo "No default address found.";
-                        }
-                    ?>
+                    <?php if (!empty($address)): ?>
+                        <?php echo $address['address'] ?>, <?php echo $address['city'] ?>, <?php echo $address['state'] ?> - <?php echo $address['pincode'] ?>
+                    <?php else: ?>
+                        No default address found.
+                    <?php endif; ?>
                 </p>
             </div>
+
+            <!-- Payment Section -->
             <div class="payment">
                 <h4>Payment Type</h4>
                 <label>
@@ -132,6 +131,7 @@
             </div>
         </div>
 
+        <!-- Cart Items -->
         <table>
             <thead>
                 <tr>
@@ -155,41 +155,41 @@
             </tbody>
         </table>
 
+        <!-- Order Summary -->
         <table class="summary">
             <tr>
                 <td>Sub Total:</td>
-                <td>Rs <?php echo number_format($subtotal, 2) ?></td>
+                <td>₹<?php echo number_format($subtotal, 2) ?></td>
             </tr>
 
-            <?php if (isset($discount) && $discount > 0): ?>
+            <?php if (!empty($discount) && $discount > 0): ?>
             <tr>
-                <td>Promocode Discount Price:</td>
-                <td>- Rs <?php echo number_format($discount, 2) ?></td>
+                <td>Promocode Discount:</td>
+                <td>- ₹<?php echo number_format($discount, 2) ?></td>
             </tr>
             <?php endif; ?>
 
-            <?php if ($this->session->userdata('use_wallet') && isset($wallet_amount) && $wallet_amount > 0): ?>
+            <?php if ($this->session->userdata('use_wallet') && !empty($wallet_amount) && $wallet_amount > 0): ?>
             <tr>
                 <td>Wallet Used:</td>
-                <td>- Rs <?php echo number_format($wallet_amount, 2); ?></td>
+                <td>- ₹<?php echo number_format($wallet_amount, 2) ?></td>
             </tr>
             <?php endif; ?>
 
             <tr>
                 <td>Delivery Charges:</td>
-                <td>+ Rs <?php echo number_format($delivery_charge ?? 0, 2) ?></td>
+                <td>+ ₹<?php echo number_format($delivery_charge ?? 0, 2) ?></td>
             </tr>
+
             <tr class="total-row">
                 <td>Total Amount:</td>
-                <td>Rs <?php echo number_format($final_total, 2) ?></td>
+                <td>₹<?php echo number_format($final_total, 2) ?></td>
             </tr>
         </table>
 
-        <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
-            <button class="btn-confirm">Confirm Order</button>
-        </form>
+        <button type="submit" class="btn-confirm">Confirm Order</button>
+    </form>
+</div>
 
-    </div>
-    
 </body>
 </html>

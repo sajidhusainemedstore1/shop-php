@@ -1,9 +1,9 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Add Address</title>
     <style>
-        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
         .container {
             background: #fff;
             padding: 20px;
@@ -60,3 +60,4 @@
 
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

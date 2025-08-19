@@ -1,10 +1,11 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Checkout</title>
   <style>
-    body {
+    .container {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
       margin: 0;
@@ -412,3 +413,4 @@
   </script>
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

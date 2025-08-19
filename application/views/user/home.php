@@ -1,3 +1,4 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +14,6 @@
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
-        }
-
-        header {
-            background-color: #3498db;
-            color: white;
-            padding: 5px 1px;
-            text-align: center;
         }
 
         .alert {
@@ -188,97 +182,96 @@
     </style>
 </head>
 <body>
-<?php if ($this->session->flashdata('success')): ?>
-    <div class="alert alert-success">
-        <?php echo $this->session->flashdata('success'); ?>
+    <?php if ($this->session->flashdata('success')): ?>
+        <div class="alert alert-success">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?php echo $this->session->flashdata('error'); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php
+        $user_id = $this->session->userdata('user_id');
+        $user_logged_in = $this->session->userdata('user_logged_in');
+        $cart_count = $this->cart_model->count_items($user_id);
+    ?>
+
+    
+
+    <div>
+        <nav class="top-nav">
+            <?php if ($user_logged_in): ?>
+                <a href="<?php echo base_url('user/logout'); ?>" class="nav-link">Logout</a>
+                <a href="<?php echo base_url('user/view/' . $user_id) ?>" class="nav-link">Wallet History</a>
+                <a href="<?php echo base_url('user/my_orders'); ?>" class="nav-link">My Orders</a>
+                <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
+                </a>
+            <?php else: ?>
+                <a href="<?php echo base_url('user/login'); ?>" class="nav-link">Login</a>
+            <?php endif; ?>
+        </nav>
     </div>
-<?php endif; ?>
-
-<?php if ($this->session->flashdata('error')): ?>
-    <div class="alert alert-danger">
-        <?php echo $this->session->flashdata('error'); ?>
+    <div class="container">
+        <div class="products">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card">
+                    <img src="<?php echo base_url('uploads/' . $product['image']); ?>" alt="Product Image">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo $product['description']; ?></p>
+                    <p class="price">₹<?php echo number_format($product['price'], 2); ?></p>
+                    <form class="add-to-cart-form" method="post" action="<?php echo base_url('shop/add_to_cart'); ?>">
+                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-<?php endif; ?>
-
-<?php
-    $user_id = $this->session->userdata('user_id');
-    $user_logged_in = $this->session->userdata('user_logged_in');
-    $cart_count = $this->cart_model->count_items($user_id);
-?>
-
-<header>
-    <h3>Welcome to Our Store</h3>
-</header>
-
-<div>
-    <nav class="top-nav">
-        <?php if ($user_logged_in): ?>
-            <a href="<?php echo base_url('user/logout'); ?>" class="nav-link">Logout</a>
-            <a href="<?php echo base_url('user/view/' . $user_id) ?>" class="nav-link">Wallet History</a>
-            <a href="<?php echo base_url('user/my_orders'); ?>" class="nav-link">My Orders</a>
-            <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
-            </a>
-        <?php else: ?>
-            <a href="<?php echo base_url('user/login'); ?>" class="nav-link">Login</a>
-        <?php endif; ?>
-    </nav>
-</div>
-<div class="container">
-    <div class="products">
-        <?php foreach ($products as $product): ?>
-            <div class="product-card">
-                <img src="<?php echo base_url('uploads/' . $product['image']); ?>" alt="Product Image">
-                <h3><?php echo $product['name']; ?></h3>
-                <p><?php echo $product['description']; ?></p>
-                <p class="price">₹<?php echo number_format($product['price'], 2); ?></p>
-                <form class="add-to-cart-form" method="post" action="<?php echo base_url('shop/add_to_cart'); ?>">
-                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.add-to-cart-form').forEach(form => {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            fetch(this.action, {
-                method: 'POST',
-                body: new URLSearchParams(formData),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                const badge = document.getElementById('cart-count-badge');
-                if (data.cart_count !== undefined) {
-                    badge.textContent = data.cart_count;
-                    badge.style.display = 'inline-block';
-                }
-
-                const msg = document.createElement('div');
-                msg.className = 'alert ' + (data.success ? 'alert-success' : 'alert-danger');
-                msg.textContent = data.message || data.error || 'Unexpected response';
-                document.body.insertBefore(msg, document.body.firstChild);
-
-                setTimeout(() => msg.remove(), 3000);
-            })
-            .catch(err => {
-                console.error('AJAX error:', err);
-                alert('Something went wrong. Try logging in again.');
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.add-to-cart-form').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData),
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        const badge = document.getElementById('cart-count-badge');
+                        if (data.cart_count !== undefined) {
+                            badge.textContent = data.cart_count;
+                            badge.style.display = 'inline-block';
+                        }
+                    
+                        const msg = document.createElement('div');
+                        msg.className = 'alert ' + (data.success ? 'alert-success' : 'alert-danger');
+                        msg.textContent = data.message || data.error || 'Unexpected response';
+                        document.body.insertBefore(msg, document.body.firstChild);
+                    
+                        setTimeout(() => msg.remove(), 3000);
+                    })
+                    .catch(err => {
+                        console.error('AJAX error:', err);
+                        alert('Something went wrong. Try logging in again.');
+                    });
+                });
             });
         });
-    });
-});
-</script>
+    </script>
 
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

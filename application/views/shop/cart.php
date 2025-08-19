@@ -1,9 +1,10 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Shopping Cart</title>
     <style>
-        body {
+        .container {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #333;
@@ -193,73 +194,73 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Shopping Cart</h2>
 
-<h2>Shopping Cart</h2>
-
-<?php if ($this->session->flashdata('success')): ?>
-    <div class="alert alert-success">
-        <?php echo $this->session->flashdata('success'); ?>
+        <?php if ($this->session->flashdata('success')): ?>
+            <div class="alert alert-success">
+                <?php echo $this->session->flashdata('success'); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if ($this->session->flashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?php echo $this->session->flashdata('error'); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (!empty($cart_items)): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    $total = 0; 
+                    foreach ($cart_items as $item): 
+                        $total += $item['subtotal']; 
+                ?>
+                <tr data-id="<?php echo $item['id']; ?>" data-price="<?php echo $item['price']; ?>">
+                    <td data-label="Name"><?php echo $item['name']; ?></td>
+                    <td data-label="Qty">
+                        <select class="qty-select" data-id="<?php echo $item['id']; ?>">
+                            <?php for ($i = 1; $i <= 99; $i++): ?>
+                                <option value="<?php echo $i; ?>" <?php echo ($item['qty'] == $i) ? 'selected' : ''; ?>>
+                                    <?php echo $i; ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                    </td>
+                    <td data-label="Price">₹<?php echo number_format($item['price'], 2); ?></td>
+                    <td data-label="Subtotal" class="subtotal">₹<?php echo number_format($item['subtotal'], 2); ?></td>
+                    <td data-label="Actions">
+                        <a href="<?php echo base_url('shop/remove_item/' . $item['id']); ?>" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+                            
+            <p><strong>Total:</strong> <span id="total-price">₹<?php echo number_format($total, 2); ?></span></p>
+            <p><strong>Final Total:</strong> <span id="final-total">₹<?php echo number_format($total, 2); ?></span></p>
+                            
+            <form method="post" action="<?php echo base_url('shop/buy') ?>" style="margin-top: 30px;">
+                <a href="<?php echo base_url('checkout'); ?>" class="btn btn-1" style="background-color: #27ae60; margin-right: 15px;">
+                    Proceed to Checkout
+                </a>
+            </form>
+                            
+        <?php else: ?>
+            <p>Your cart is empty.</p>
+            <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
+        <?php endif; ?>
     </div>
-<?php endif; ?>
-
-<?php if ($this->session->flashdata('error')): ?>
-    <div class="alert alert-danger">
-        <?php echo $this->session->flashdata('error'); ?>
-    </div>
-<?php endif; ?>
-
-<?php if (!empty($cart_items)): ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Subtotal</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php 
-            $total = 0; 
-            foreach ($cart_items as $item): 
-                $total += $item['subtotal']; 
-        ?>
-        <tr data-id="<?php echo $item['id']; ?>" data-price="<?php echo $item['price']; ?>">
-            <td data-label="Name"><?php echo $item['name']; ?></td>
-            <td data-label="Qty">
-                <select class="qty-select" data-id="<?php echo $item['id']; ?>">
-                    <?php for ($i = 1; $i <= 99; $i++): ?>
-                        <option value="<?php echo $i; ?>" <?php echo ($item['qty'] == $i) ? 'selected' : ''; ?>>
-                            <?php echo $i; ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-            </td>
-            <td data-label="Price">₹<?php echo number_format($item['price'], 2); ?></td>
-            <td data-label="Subtotal" class="subtotal">₹<?php echo number_format($item['subtotal'], 2); ?></td>
-            <td data-label="Actions">
-                <a href="<?php echo base_url('shop/remove_item/' . $item['id']); ?>" class="btn btn-danger">Remove</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    <p><strong>Total:</strong> <span id="total-price">₹<?php echo number_format($total, 2); ?></span></p>
-    <p><strong>Final Total:</strong> <span id="final-total">₹<?php echo number_format($total, 2); ?></span></p>
-
-    <form method="post" action="<?php echo base_url('shop/buy') ?>" style="margin-top: 30px;">
-        <a href="<?php echo base_url('checkout'); ?>" class="btn btn-1" style="background-color: #27ae60; margin-right: 15px;">
-            Proceed to Checkout
-        </a>
-    </form>
-
-<?php else: ?>
-    <p>Your cart is empty.</p>
-    <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
-<?php endif; ?>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     function updateTotal() {
@@ -325,3 +326,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

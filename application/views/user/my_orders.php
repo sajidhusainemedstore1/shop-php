@@ -1,3 +1,4 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     <style>
-    body {
+.container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     margin: 40px;
@@ -188,3 +189,4 @@ p {
 
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

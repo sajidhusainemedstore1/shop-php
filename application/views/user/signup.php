@@ -1,3 +1,4 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     box-sizing: border-box;
   }
 
-  body {
+  /* body {
     background: #f0f2f5;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -18,7 +19,7 @@
     min-height: 100vh;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
   .container {
     background: white;
@@ -165,3 +166,4 @@ $(document).on('click', '.toggle-password1', function() {
 </script>
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

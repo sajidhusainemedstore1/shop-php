@@ -1,3 +1,4 @@
+<?php $this->load->view("user/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -282,3 +283,4 @@
 
 </body>
 </html>
+<?php $this->load->view("user/footer"); ?>

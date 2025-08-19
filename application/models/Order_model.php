@@ -6,14 +6,15 @@ class Order_model extends CI_Model {
     }
 
     public function get_order_by_id($order_id) {
-        $this->db->select('o.id, o.total, o.created_at, o.coupon_code, o.dis_amount, o.return_status, o.wallet_used, u.fullname');
+        $this->db->select('o.id, o.total, o.created_at, o.coupon_code, o.dis_amount, 
+                           o.return_status, o.wallet_used, o.status, u.fullname');
         $this->db->from('orders o');
         $this->db->join('user u', 'o.user_id = u.id');
         $this->db->where('o.id', $order_id);
         $query = $this->db->get();
         return $query->row_array(); 
     }
-
+    
     public function get_order_items($order_id) {
         $this->db->select('p.name, od.qty, od.price, od.return_status');
         $this->db->from('order_items od');

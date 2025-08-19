@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Order Details</title>
     <style>
-        body {
+        .container {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 800px;
             margin: 30px auto;
@@ -89,6 +89,7 @@
     </style>
 </head>
 <body>
+<div class="container">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <a href="<?php echo base_url('user/my_orders') ?>" class="back-link">My Orders</a>
@@ -135,9 +136,27 @@
         ?>
 
     <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
-        <a href="<?php echo base_url('user/return_order/' . $order['id']) ?>" onclick="return confirm('Are you sure you want to return this order?')">
-            <button type="button">Return Order</button>
-        </a>
+        <?php
+        $returnButton = false;
+
+        if (isset($order['status']) && $order['status'] === 'Delivered' && !empty($order['delivered_at'])) {
+            $deliveredAt = strtotime($order['delivered_at']);
+            $now = time();
+            $diffDays = ($now - $deliveredAt) / (60 * 60 * 24);
+        
+            if ($diffDays <= 2) { 
+                $returnButton = true;
+            }
+        }
+        ?>
+
+        <?php if ($returnButton): ?>
+            <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
+                <button type="submit" onclick="return confirm('Are you sure you want to return this order?')">
+                    Return Order
+                </button>
+            </form>
+        <?php endif; ?>
 
         <table>
             <thead>
@@ -188,7 +207,7 @@
             <button type="button" onclick="downloadPDF()">Download PDF</button>
         </div>
     </form>
-
+</div>
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {
         const checkboxes = document.querySelectorAll('input[name="return_items[]"]:checked');

@@ -580,11 +580,20 @@ class Admin extends CI_Controller {
         return $this->db->update('order_items', ['return_status' => $status]);
     }
 
-    public function deliverd_order() {
-        
+    public function deliverd_order($order_id) {
+        $this->db->where('id', $order_id);
+        $this->db->update('orders', [
+            'status' => 'Delivered',
+            'delivered_at' => date('Y-m-d H:i:s')
+        ]);
+    
+        redirect('admin/order_detail/' . $order_id);
+    }
+    
+    public function cancel_order($order_id) {
+        $this->db->where('id', $order_id)->update('orders', ['status' => 'Cancelled']);
+        $this->session->set_flashdata('error', 'Order has been Cancelled');
+        redirect('admin/order_detail/' . $order_id);
     }
 
-    public function cancel_order() {
-
-    }
 }

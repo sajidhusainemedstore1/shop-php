@@ -245,9 +245,23 @@
             </tr>
         </tfoot>
     </table>
+    <?php $status = isset($order['status']) ? $order['status'] : ''; ?>
     <div class="clearfix">
-        <a href="<?php echo base_url('admin/deliverd_order') ?>" class="btn">Deliver</a>
-        <a href="<?php echo base_url('admin/cancel_order') ?>" class="btn">Cancel_order</a>
+        <?php if ($status != 'Delivered' && $status != 'Cancelled'): ?>
+            <a href="<?php echo base_url('admin/deliverd_order/' . $order['id']) ?>" 
+               class="btn" 
+               onclick="return confirm('Mark this order as Delivered?');">
+               Deliver
+            </a>
+
+            <a href="<?php echo base_url('admin/cancel_order/' . $order['id']) ?>" 
+               class="btn" 
+               onclick="return confirm('Cancel this order?');">
+               Cancel Order
+            </a>
+        <?php else: ?>
+            <p><strong>Status:</strong> <?php echo ucfirst($status); ?></p>
+        <?php endif; ?>
         <a href="<?php echo base_url('admin/invoice/' . $order['id']) ?>" target="_blank" class="btn invoice-link">Print (PDF)</a>
 
         <?php if ($show_buttons): ?>

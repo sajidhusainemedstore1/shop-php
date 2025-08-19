@@ -52,7 +52,7 @@
         }
 
         thead {
-            background-color: #2980b9;
+            background-color: #3498db;
             color: #fff;
         }
 

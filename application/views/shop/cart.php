@@ -261,69 +261,69 @@
             <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
         <?php endif; ?>
     </div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    function updateTotal() {
-        let total = 0;
-        document.querySelectorAll('tr[data-id]').forEach(row => {
-            const qty = parseInt(row.querySelector('.qty-select').value) || 0;
-            const price = parseFloat(row.getAttribute('data-price')) || 0;
-            const subtotal = qty * price;
-            row.querySelector('.subtotal').textContent = '₹' + subtotal.toFixed(2);
-            total += subtotal;
-        });
-
-        document.querySelector('#total-price').textContent = '₹' + total.toFixed(2);
-        document.querySelector('#final-total').textContent = '₹' + total.toFixed(2);
-    }
-
-    function updateCartCount() {
-        fetch("<?php echo base_url('shop/get_cart_count'); ?>")
-        .then(response => response.json())
-        .then(data => {
-            const badge = document.getElementById('cart-count-badge');
-            if (data.count && data.count > 0) {
-                badge.textContent = data.count;
-                badge.style.display = 'inline-block';
-            } else {
-                badge.style.display = 'none';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function updateTotal() {
+                let total = 0;
+                document.querySelectorAll('tr[data-id]').forEach(row => {
+                    const qty = parseInt(row.querySelector('.qty-select').value) || 0;
+                    const price = parseFloat(row.getAttribute('data-price')) || 0;
+                    const subtotal = qty * price;
+                    row.querySelector('.subtotal').textContent = '₹' + subtotal.toFixed(2);
+                    total += subtotal;
+                });
+            
+                document.querySelector('#total-price').textContent = '₹' + total.toFixed(2);
+                document.querySelector('#final-total').textContent = '₹' + total.toFixed(2);
             }
-        })
-        .catch(err => {
-            console.error('Failed to fetch cart count:', err);
-        });
-    }
-
-    document.querySelectorAll('.qty-select').forEach(select => {
-        select.addEventListener('change', function () {
-            const itemId = this.getAttribute('data-id');
-            const qty = this.value;
-
-            fetch("<?php echo base_url('shop/update_cart_ajax'); ?>", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `item_id=${itemId}&qty=${qty}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    updateTotal();
-                    updateCartCount();
-                } else {
-                    alert("Failed to update cart: " + (data.error || ""));
-                }
-            })
-            .catch(error => {
-                console.error("AJAX error:", error);
-                alert("An error occurred.");
+        
+            function updateCartCount() {
+                fetch("<?php echo base_url('shop/get_cart_count'); ?>")
+                .then(response => response.json())
+                .then(data => {
+                    const badge = document.getElementById('cart-count-badge');
+                    if (data.count && data.count > 0) {
+                        badge.textContent = data.count;
+                        badge.style.display = 'inline-block';
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to fetch cart count:', err);
+                });
+            }
+        
+            document.querySelectorAll('.qty-select').forEach(select => {
+                select.addEventListener('change', function () {
+                    const itemId = this.getAttribute('data-id');
+                    const qty = this.value;
+                
+                    fetch("<?php echo base_url('shop/update_cart_ajax'); ?>", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `item_id=${itemId}&qty=${qty}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateTotal();
+                            updateCartCount();
+                        } else {
+                            alert("Failed to update cart: " + (data.error || ""));
+                        }
+                    })
+                    .catch(error => {
+                        console.error("AJAX error:", error);
+                        alert("An error occurred.");
+                    });
+                });
             });
+        
+            updateTotal();
+            updateCartCount();
         });
-    });
-
-    updateTotal();
-    updateCartCount();
-});
-</script>
+    </script>
 </body>
 </html>
 <?php $this->load->view("user/footer"); ?>

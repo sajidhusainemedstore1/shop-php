@@ -116,8 +116,8 @@ footer {
                 <li><a href="<?php echo base_url('admin/userlist') ?>">Users</a></li>
                 <li><a href="<?php echo base_url('admin/product_list') ?>">Products</a></li>
                 <li><a href="<?php echo base_url('wallet/wallet_dashboard') ?>">Wallet</a></li>
-                <li><a href="<?php echo base_url('admin/coupons') ?>">Coupons</a></li>
-                <li><a href="<?php echo base_url('admin/order_list') ?>">Orders</a></li>
+                <li><a href="<?php echo base_url('admin/coupons') ?>">Promocode</a></li>
+                <li><a href="<?php echo base_url('admin/order_list') ?>">Customer Orders</a></li>
                 <li><a href="<?php echo base_url('admin/logout') ?>">Logout</a></li>
             </ul>
         </nav>

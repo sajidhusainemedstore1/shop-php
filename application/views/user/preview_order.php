@@ -66,7 +66,7 @@
             width: 200px;
             padding: 12px;
             font-size: 16px;
-            background-color: #007bff;
+            background-color: #06979A;
             color: #fff;
             border: none;
             border-radius: 6px;

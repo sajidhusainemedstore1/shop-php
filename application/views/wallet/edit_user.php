@@ -13,7 +13,7 @@
             border: 1px solid #ccc; border-radius: 4px;
         }
         button {
-            background-color: #28a745; color: white;
+            background-color: #06979A; color: white;
             margin-top: 15px;
         }
         button:hover {

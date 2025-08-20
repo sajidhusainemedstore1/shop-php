@@ -58,11 +58,11 @@
     }
 
     .address-card {
-      border: 2px solid #28a745;
+      border: 2px solid #06979A;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
-      background-color: #f7fff8;
+      background-color: #e3f2f3;
       position: relative;
     }
 
@@ -74,7 +74,7 @@
       position: absolute;
       right: 15px;
       top: 15px;
-      background: #28a745;
+      background: #06979A;
       color: white;
       font-size: 12px;
       padding: 2px 8px;
@@ -86,7 +86,7 @@
     }
 
     .address-actions a {
-      color: #28a745;
+      color: #06979A;
       font-weight: bold;
       margin-right: 10px;
       text-decoration: none;
@@ -127,11 +127,11 @@
       color: #155724;
       font-size: 14px;
       margin-top: 10px;
-      border-left: 4px solid #28a745;
+      border-left: 4px solid #06979A;
     }
 
     .btn {
-      background: #007bff;
+      background: #06979A;
       color: white;
       border: none;
       padding: 10px 20px;
@@ -177,18 +177,18 @@
     }
 
     .btn-danger {
-      background-color: #dc3545;
+      background-color: #06979A;
     }
 
     .btn-danger:hover {
-      background-color: #b02a37;
+      background-color: rgba(9, 83, 45, 1)
     }
 
     .btn-preview {
         display: inline-block;
         padding: 10px 20px;
         margin-top: 20px;
-        background-color: #17a2b8;
+        background-color: #06979A;
         color: #fff;
         border: none;
         border-radius: 6px;

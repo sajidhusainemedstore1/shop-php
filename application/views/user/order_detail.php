@@ -14,17 +14,17 @@
             padding: 20px;
             color: #333;
         }
-        h2 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        h2 { color: #333; border-bottom: 2px solid #06979A; padding-bottom: 5px; margin-top: 30px; }
         p { font-size: 16px; line-height: 1.5; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
         th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-        th { background-color: #007bff; color: #fff; font-weight: 600; }
+        th { background-color: #06979A; color: #fff; font-weight: 600; }
         td { font-size: 15px; }
-        a.back-link { display: inline-block; margin-bottom: 10px; color: #007bff; font-size: 15px; }
+        a.back-link { display: inline-block; margin-bottom: 10px; color: #06979A; font-size: 15px; }
         a.back-link:hover { text-decoration: underline; }
         .total-row td { font-weight: bold; background-color: #f1f1f1; }
-        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; transition: background-color 0.3s ease; }
-        button:hover { background-color: #0056b3; }
+        button { background-color: #06979A; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; transition: background-color 0.3s ease; }
+        button:hover { background-color: #0d3435ff; }
         .invoice-link { text-align: right; margin-top: 20px; }
     </style>
 </head>
@@ -40,15 +40,14 @@
     <p><strong>Order Date:</strong> <?php echo date('d M Y', strtotime($order['created_at'])) ?></p>
     <p><strong>Total:</strong> ₹<?php echo number_format($order['total'], 2) ?></p>
 
-    <!-- Return Status -->
     <?php if (isset($order['return_status'])): ?>
         <?php if ($order['return_status'] === 'approved'): ?>
-            <div style="background:#28a745; color:white; padding:5px 10px; border-radius:4px;">Your return request approved.</div>
+            <div style="background:#06979A; color:white; padding:5px 10px; border-radius:4px;">Your return request approved.</div>
             <?php if (!empty($order['return_approve_comment'])): ?>
                 <div>Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
             <?php endif; ?>
         <?php elseif ($order['return_status'] === 'cancelled'): ?>
-            <div style="background:#dc3545; color:white; padding:5px 10px; border-radius:4px;">Your return request Cancelled.</div>
+            <div style="background:#06979A; color:white; padding:5px 10px; border-radius:4px;">Your return request Cancelled.</div>
             <?php if (!empty($order['return_cancel_comment'])): ?>
                 <div>Cancelled Comment: <?php echo htmlspecialchars($order['return_cancel_comment']) ?></div>
             <?php endif; ?>
@@ -91,12 +90,12 @@
         ?>
         <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
             <?php if ($returnButton): ?>
-    <button type="submit" id="returnBtn" onclick="return confirmReturn()">Return Selected</button>
-<?php endif; ?>
+            <button type="submit" id="returnBtn" onclick="return confirmReturn()">Return Selected</button>
+        <?php endif; ?>
 
-<?php if ($reorderButton): ?>
-    <button type="submit" id="reorderBtn" formaction="<?php echo base_url('user/re_order/' . $order['id']) ?>">Re-order Selected</button>
-<?php endif; ?>
+        <?php if ($reorderButton): ?>
+            <button type="submit" id="reorderBtn" formaction="<?php echo base_url('use/re_order/' . $order['id']) ?>">Re-order Selected</button>
+        <?php endif; ?>r
 
             <table>
                 <thead>

@@ -32,7 +32,7 @@ table {
 }
 
 thead {
-    background-color: #007bff;
+    background-color: #06979A;
     color: white;
 }
 
@@ -52,7 +52,7 @@ tbody tr:hover {
 
 .btn {
     padding: 8px 14px;
-    background-color: #007bff;
+    background-color: #06979A;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -81,7 +81,7 @@ p {
     max-width: 900px;
     margin: 0 auto 20px auto;
     font-weight: 600;
-    color: #007bff;
+    color: #06979A;
     text-decoration: none;
     font-size: 16px;
     text-align: left;
@@ -94,7 +94,7 @@ p {
     outline: none;
 }
 .btn-1 {
-    background-color: rgb(36, 182, 207);
+    background-color: #06979A;
     color: white;
     padding: 12px 28px;
     font-weight: bold;
@@ -169,7 +169,7 @@ p {
                                 <div style="margin-top: 5px;">Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
                             <?php endif; ?>
                         <?php elseif ($order['return_status'] === 'cancelled'): ?>
-                            <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                            <div style="background: #ec1313ff; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
                                 Your return Request Cancelled.
                             </div>
                             <?php if (!empty($order['return_cancel_comment'])): ?>

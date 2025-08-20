@@ -19,14 +19,14 @@
         align-items: center;
         margin-bottom: 20px;
         padding: 10px 20px;
-        background-color: #007bff;
+        background-color: #06979A;
         color: white;
         border-radius: 5px;
     }
 
     .add-btn {
         text-decoration: none;
-        background-color: #28a745;
+        background-color: #06979A;
         color: white;
         padding: 8px 15px;
         border-radius: 4px;
@@ -74,11 +74,11 @@
     }
 
     .action-link.edit {
-        color: #007bff;
+        color: #06979A;
     }
 
     .action-link.delete {
-        color: #dc3545;
+        color: #06979A;
     }
 
     .action-link:hover {

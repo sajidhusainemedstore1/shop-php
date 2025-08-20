@@ -24,7 +24,7 @@
 
     .sidebar {
         width: 220px;
-        background-color: #1f4a41;
+        background-color: #06979A;
         color: white;
         padding: 20px;
     }
@@ -50,7 +50,7 @@
     }
 
     .sidebar nav ul li a:hover {
-        color:rgb(219, 31, 31);
+        color: #07434bff;
     }
 
     .main-content {
@@ -92,7 +92,7 @@
     }
 
     .quick-links ul li a {
-        color: #3498db;
+        color: #06979A;
         text-decoration: none;
         font-weight: 500;
     }

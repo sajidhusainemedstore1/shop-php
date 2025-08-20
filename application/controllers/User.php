@@ -253,13 +253,13 @@ class User extends CI_Controller {
 
     public function re_order($order_id) {
         if (!$this->session->userdata('user_id')) {
-            redirect('login');
+            redirect('user/login');
         }
     
         $user_id = $this->session->userdata('user_id');
     
         $order_items = $this->order_model->get_order_items($order_id);
-    
+
         if (!empty($order_items)) {
             foreach ($order_items as $item) {
                 $cart_item = $this->cart_model->get_cart_item($user_id, $item['product_id']);

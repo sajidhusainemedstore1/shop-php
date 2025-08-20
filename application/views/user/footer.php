@@ -7,7 +7,7 @@
     <style>
         footer {
             position: relative;
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
             padding: 10px 20px;
             height: 60px; /* adjust if needed */
@@ -32,7 +32,7 @@
     <div>
         <footer>
             <div class="footer-center">
-                <h4>Copyright © 2025 Shop. All rights reserved.</h4>
+                <h4><p> Copyright &copy; <?php echo date('Y') ?> Shop. All rights reserved.</p></h4>
             </div>
         </footer>
     </div>

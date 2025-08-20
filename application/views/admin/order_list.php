@@ -34,7 +34,7 @@
 
     .export-btn, .invoice-link {
         display: inline-block;
-        background-color: #007bff;
+        background-color: #06979A;
         color: #fff;
         padding: 10px 18px;
         text-decoration: none;
@@ -69,7 +69,7 @@
     }
 
     th {
-        background-color: #007bff;
+        background-color: #06979A;
         color: #fff;
         font-weight: 600;
     }
@@ -83,7 +83,7 @@
     }
 
     a {
-        color: #007bff;
+        color: #06979A;
         text-decoration: none;
     }
 
@@ -171,7 +171,7 @@
                                             <div style="margin-top: 5px;">Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
                                         <?php endif; ?>
                                     <?php elseif ($order['return_status'] === 'cancelled'): ?>
-                                        <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
+                                        <div style="background: #f10505ff; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
                                             Your return Request Cancelled.
                                         </div>
                                         <?php if (!empty($order['return_cancel_comment'])): ?>

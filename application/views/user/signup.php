@@ -69,7 +69,7 @@
   input[type="text"]:focus,
   input[type="email"]:focus,
   input[type="password"]:focus {
-    border-color: #007bff;
+    border-color: #06979A;
     outline: none;
   }
 
@@ -77,7 +77,7 @@
     margin-top: 25px;
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #06979A;
     border: none;
     border-radius: 6px;
     font-size: 1.1rem;

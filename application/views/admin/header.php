@@ -25,7 +25,7 @@ body {
 /* Sidebar */
 .sidebar {
     width: 220px;
-    background-color: #1f4a41;
+    background-color: #06979A;
     color: white;
     padding: 20px;
     flex-shrink: 0;
@@ -62,7 +62,7 @@ body {
 
 .sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
-    background-color: #27ae60;
+    background-color: #07434bff;
     color: #fff;
 }
 
@@ -77,7 +77,7 @@ body {
 
 /* Top Header (optional, if needed separately) */
 .top-header {
-    background-color: #1f4a41;
+    background-color: #06979A;
     color: white;
     padding: 10px 20px;
     display: flex;

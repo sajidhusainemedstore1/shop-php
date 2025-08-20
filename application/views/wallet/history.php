@@ -31,7 +31,7 @@
         }
 
         table th {
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
         }
 
@@ -58,7 +58,7 @@
 
         .wallet-recharge button {
             padding: 10px 20px;
-            background-color: #27ae60;
+            background-color: #06979A;
             color: white;
             border: none;
             border-radius: 4px;

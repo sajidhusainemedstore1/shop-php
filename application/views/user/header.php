@@ -14,7 +14,7 @@
 
         header {
             position: relative;
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
             padding: 10px 20px;
             height: 60px; /* adjust if needed */

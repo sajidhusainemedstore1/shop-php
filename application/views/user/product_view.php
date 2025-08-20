@@ -38,12 +38,12 @@
             overflow: hidden;
         }
         .product-price {
-            color: #28a745;
+            color: #06979A;
             margin-bottom: 10px;
             font-size: 18px;
         }
         .btn-add {
-            background-color: #007bff;
+            background-color: #06979A;
             border: none;
             color: white;
             padding: 8px 15px;

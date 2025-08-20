@@ -24,7 +24,7 @@
 
     h2, h3 {
         color: #222;
-        border-bottom: 2px solid #007bff;
+        border-bottom: 2px solid #06979A;
         padding-bottom: 5px;
         margin-top: 30px;
         margin-bottom: 15px;
@@ -53,7 +53,7 @@
     }
 
     th {
-        background-color: #007bff;
+        background-color: #06979A;
         color: #ffffff;
         font-weight: 600;
         text-transform: uppercase;
@@ -74,7 +74,7 @@
         display: inline-block;
         margin-top: 30px;
         padding: 10px 20px;
-        background-color: #007bff;
+        background-color: #06979A;
         color: #fff;
         font-size: 15px;
         font-weight: 500;
@@ -87,7 +87,7 @@
     }
 
     .btn:hover {
-        background-color: #0056b3;
+        background-color: #0d3435ff;
     }
 
     /* Invoice Link Styling */
@@ -99,7 +99,7 @@
     .back-link {
         display: inline-block;
         margin-bottom: 15px;
-        color: #007bff;
+        color: #06979A;
         text-decoration: none;
         font-weight: 500;
     }
@@ -119,7 +119,7 @@
     }
     
     .btn-approve {
-        background-color: #28a745; /* Green */
+        background-color: #06979A; /* Green */
     }
     
     .btn-approve:hover {
@@ -127,7 +127,7 @@
     }
     
     .btn-cancel {
-        background-color: #dc3545; /* Red */
+        background-color: #06979A; /* Red */
     }
     
     .btn-cancel:hover {

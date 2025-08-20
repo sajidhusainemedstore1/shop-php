@@ -15,7 +15,7 @@
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input, textarea { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        .btn { padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; }
+        .btn { padding: 10px 20px; background: #06979A; color: white; border: none; border-radius: 5px; }
     </style>
 </head>
 <body>

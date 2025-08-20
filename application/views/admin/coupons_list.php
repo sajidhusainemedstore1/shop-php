@@ -16,12 +16,12 @@
             text-align: left;
         }
         th {
-            background-color:rgb(18, 73, 129);
+            background-color:#06979A;
             color: white;
         }
         a.button {
             padding: 5px 10px;
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
             text-decoration: none;
             border-radius: 3px;
@@ -36,7 +36,7 @@
             margin-right: 5px;
         }
         a.button.delete {
-            background-color: #e74c3c;
+            background-color: #06979A;
         }
         .action-buttons {
     display: flex;

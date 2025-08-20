@@ -1,8 +1,8 @@
-<?php
-require_once APPPATH . 'third_party/tcpdf_min/tcpdf.php';
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+require_once(APPPATH.'third_party/tcpdf_min/tcpdf.php');
 
 class Pdf extends TCPDF {
-    public function __construct() {
+    function __construct() {
         parent::__construct();
     }
 }

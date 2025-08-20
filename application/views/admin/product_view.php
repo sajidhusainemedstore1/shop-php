@@ -11,7 +11,7 @@
             padding: 10px; border: 1px solid #ccc; text-align: left;
         }
         .btn {
-            padding: 6px 12px; background-color: #28a745;
+            padding: 6px 12px; background-color: #06979A;
             color: #fff; border: none; border-radius: 4px; cursor: pointer;
         }
         .btn:hover {

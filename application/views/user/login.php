@@ -36,7 +36,7 @@
         input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #06979A;
             border: none;
             color: white;
             border-radius: 3px;

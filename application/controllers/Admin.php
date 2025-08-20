@@ -357,6 +357,8 @@ class Admin extends CI_Controller {
     }
 
     public function invoice($order_id) {
+        $this->output->enable_profiler(false);
+        ob_clean();
 
         $order = $this->admin_model->get_order_by_id($order_id);
         $items = $this->admin_model->get_order_items($order_id);

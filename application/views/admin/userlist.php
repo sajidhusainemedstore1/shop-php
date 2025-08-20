@@ -27,7 +27,7 @@
     text-align: left;
   }
   th {
-    background-color: #007bff;
+    background-color: #06979A;
     color: white;
   }
   tr:nth-child(even) {
@@ -39,7 +39,7 @@
     text-align: right;
   }
   .logout a {
-    color: #007bff;
+    color: #06979A;
     text-decoration: none;
     font-weight: bold;
   }
@@ -76,8 +76,8 @@
   <td><?php echo ($user['email']); ?></td>
   <td><?php echo ($user['mobile']); ?></td>
   <td>
-    <a href="<?php echo base_url('admin/edit/' . $user['id']); ?>" style="margin-right: 10px; color: #28a745; text-decoration: none;">Edit</a>
-    <a href="<?php echo base_url('admin/delete/' . $user['id']); ?>" onclick="return confirm('Are you sure you want to delete this user?');" style="color: #dc3545; text-decoration: none;">Delete</a>
+    <a href="<?php echo base_url('admin/edit/' . $user['id']); ?>" style="margin-right: 10px; color: #06979A; text-decoration: none;">Edit</a>
+    <a href="<?php echo base_url('admin/delete/' . $user['id']); ?>" onclick="return confirm('Are you sure you want to delete this user?');" style="color: #06979A; text-decoration: none;">Delete</a>
   </td>
 </tr>
 

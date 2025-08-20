@@ -52,7 +52,7 @@
         }
 
         thead {
-            background-color: #3498db;
+            background-color: #06979A;
             color: #fff;
         }
 
@@ -113,24 +113,15 @@
         }
 
         .btn-danger {
-            background-color: #dc3545;
+            background-color: #06979A;
         }
 
         .btn-danger:hover {
-            background-color: #b02a37;
-        }
-
-        .btn-buy {
-            background-color: #f39c12;
-            margin-left: 15px;
-        }
-
-        .btn-buy:hover {
-            background-color: #d48806;
+            background-color: #0c595aff;
         }
 
         .btn-1 {
-            background-color: rgb(36, 182, 207);
+            background-color: #06979A;
             color: white;
             padding: 12px 28px;
             font-weight: bold;
@@ -141,7 +132,7 @@
         }
 
         .btn-1:hover {
-            background-color: #2980b9;
+            background-color: #0c595aff;
         }
 
         @media (max-width: 600px) {
@@ -251,7 +242,7 @@
             <p><strong>Final Total:</strong> <span id="final-total">₹<?php echo number_format($total, 2); ?></span></p>
                             
             <form method="post" action="<?php echo base_url('shop/buy') ?>" style="margin-top: 30px;">
-                <a href="<?php echo base_url('checkout'); ?>" class="btn btn-1" style="background-color: #27ae60; margin-right: 15px;">
+                <a href="<?php echo base_url('checkout'); ?>" class="btn btn-1" style="background-color: #06979A; margin-right: 15px;">
                     Proceed to Checkout
                 </a>
             </form>

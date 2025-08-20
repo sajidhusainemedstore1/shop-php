@@ -79,7 +79,7 @@
             font-size: 16px;
             font-weight: bold;
             margin: 10px 0;
-            color: #27ae60;
+            color: #06979A;
         }
 
         .product-card form {
@@ -87,7 +87,7 @@
         }
 
         .product-card button {
-            background-color: #3498db;
+            background-color: #06979A;
             border: none;
             color: white;
             padding: 10px 15px;
@@ -134,17 +134,17 @@
         .nav-link {
             display: inline-block;
             text-decoration: none;
-            color: #3498db;
+            color: #06979A;
             font-weight: bold;
             margin-left: 15px;
             padding: 6px 12px;
-            border: 1px solid #3498db;
+            border: 1px solid #06979A;
             border-radius: 4px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
     
         .nav-link:hover {
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
         }
     
@@ -159,17 +159,17 @@
     
         .top-nav .nav-link {
             text-decoration: none;
-            color: #3498db;
+            color: #06979A;
             font-weight: bold;
             margin-left: 15px;
             padding: 6px 12px;
-            border: 1px solid #3498db;
+            border: 1px solid #06979A;
             border-radius: 4px;
             transition: background 0.3s, color 0.3s;
         }
     
         .top-nav .nav-link:hover {
-            background-color: #3498db;
+            background-color: #06979A;
             color: white;
         }
     

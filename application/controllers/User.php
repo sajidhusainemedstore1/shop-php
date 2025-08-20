@@ -91,6 +91,17 @@ class User extends CI_Controller {
                 redirect('user/login');
             }
         }
+        $recaptchaResponse = $this->input->post('g-recaptcha-response');
+        $secretKey = "6LezkawrAAAAAHFiXnzh07vcwapa3Ei3MvbUEtO4";
+        $userIp = $this->input->ip_address();
+        
+        $verifyResponse = file_get_contents(
+            'https://www.google.com/recaptcha/api/siteverify?secret='
+            . $secretKey . '&response=' . $recaptchaResponse . '&remoteip=' . $userIp
+        );
+    
+        $responseData = json_decode($verifyResponse);
+    
     }
 
     public function home() {
@@ -276,5 +287,25 @@ class User extends CI_Controller {
     
         redirect('shop/cart');
     }
+
+    // public function submit_signup() {
+    //     $recaptchaResponse = $this->input->post('g-recaptcha-response');
+    //     $secretKey = "6LezkawrAAAAAHFiXnzh07vcwapa3Ei3MvbUEtO4";
+    //     $userIp = $this->input->ip_address();
+        
+    //     $verifyResponse = file_get_contents(
+    //         'https://www.google.com/recaptcha/api/siteverify?secret='
+    //         . $secretKey . '&response=' . $recaptchaResponse . '&remoteip=' . $userIp
+    //     );
+    
+    //     $responseData = json_decode($verifyResponse);
+    
+    //     if ($responseData->success) {
+    //         echo "<h3 style='color:green;'>Signup successful! Captcha verified</h3>";
+    //     } else {
+    //         echo "<h3 style='color:red;'>Captcha verification failed. Please try again</h3>";
+    //     }
+    //     redirect('user/login');
+    // }
 
 }

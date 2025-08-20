@@ -78,7 +78,7 @@ p {
 .home-link {
     display: block;
     width: 90%;
-    max-width: 900px;
+    max-width: 1350px;
     margin: 0 auto 20px auto;
     font-weight: 600;
     color: #06979A;
@@ -90,7 +90,7 @@ p {
 .home-link:hover,
 .home-link:focus {
     text-decoration: underline;
-    color: #0056b3;
+    color: #00b386ff;
     outline: none;
 }
 .btn-1 {

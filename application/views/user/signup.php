@@ -6,20 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>User_Signup</title>
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  /* body {
-    background: #f0f2f5;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-  } */
+  * { box-sizing: border-box; }
 
   .container {
     background: white;
@@ -28,13 +15,10 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     max-width: 400px;
     width: 100%;
+    margin: 30px auto;
   }
 
-  h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
-  }
+  h2 { text-align: center; margin-bottom: 25px; color: #333; }
 
   .error {
     background-color: #f8d7da;
@@ -57,7 +41,8 @@
 
   input[type="text"],
   input[type="email"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="file"] {
     width: 100%;
     padding: 10px 12px;
     border: 1.5px solid #ccc;
@@ -66,9 +51,7 @@
     transition: border-color 0.3s ease;
   }
 
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus {
+  input:focus {
     border-color: #06979A;
     outline: none;
   }
@@ -87,30 +70,15 @@
     transition: background-color 0.25s ease;
   }
 
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
+  button[type="submit"]:hover { background-color: #0056b3; }
 
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .container {
-      padding: 20px 25px;
-    }
+  .toggle-password, .toggle-password1 {
+    float: right;
+    top: -25px;
+    right: 10px;
+    position: relative;
+    cursor: pointer;
   }
-  .toggle-password1 {
-    float: right;
-    top: -25px;
-    right: 10px;
-    position: relative;
-    cursor: pointer;
-}
-  .toggle-password {
-    float: right;
-    top: -25px;
-    right: 10px;
-    position: relative;
-    cursor: pointer;
-}
 </style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -136,30 +104,33 @@
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Password" required />
-        <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+        <span class="fa fa-fw fa-eye field_icon toggle-password"></span>
 
         <label for="Con_Password">Confirm Password:</label>
         <input type="password" id="Con_Password" name="Con_Password" placeholder="Confirm Password" required />
-        <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password1" ></span>
+        <span class="fa fa-fw fa-eye field_icon toggle-password1"></span>
 
-        <label for="image">Image Uploads</label>
+        <label style="margin-top:20px;">Captcha Verification:</label>
+        <div class="g-recaptcha" data-sitekey="6LezkawrAAAAAKnwdIOjhpiKeWuQfbjjGdnfoJid"></div>
+
+        <label for="image">Image Upload</label>
         <input type="file" id="image" name="image" required />
+
         <button type="submit">Signup</button>
     </form>
 </div>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script>
 $(document).on('click', '.toggle-password', function() {
-
     $(this).toggleClass("fa-eye fa-eye-slash");
-    
     var input = $("#password");
     input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 });
 
 $(document).on('click', '.toggle-password1', function() {
-
     $(this).toggleClass("fa-eye fa-eye-slash");
-    
     var input = $("#Con_Password");
     input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 });

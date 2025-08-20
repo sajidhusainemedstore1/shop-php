@@ -16,7 +16,7 @@ class Order_model extends CI_Model {
     }
     
     public function get_order_items($order_id) {
-        $this->db->select('p.name, od.qty, od.price, od.return_status');
+        $this->db->select('od.product_id, p.name, od.qty, od.price, od.return_status');
         $this->db->from('order_items od');
         $this->db->join('products p', 'od.product_id = p.id');
         $this->db->where('od.order_id', $order_id);

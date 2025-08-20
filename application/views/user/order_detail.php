@@ -14,78 +14,18 @@
             padding: 20px;
             color: #333;
         }
-
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #007bff;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        td {
-            font-size: 15px;
-        }
-
-        a.back-link {
-            display: inline-block;
-            margin-bottom: 10px;
-            color: #007bff;
-            font-size: 15px;
-        }
-
-        a.back-link:hover {
-            text-decoration: underline;
-        }
-
-        .total-row td {
-            font-weight: bold;
-            background-color: #f1f1f1;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .invoice-link {
-            text-align: right;
-            margin-top: 20px;
-        }
+        h2 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        p { font-size: 16px; line-height: 1.5; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #007bff; color: #fff; font-weight: 600; }
+        td { font-size: 15px; }
+        a.back-link { display: inline-block; margin-bottom: 10px; color: #007bff; font-size: 15px; }
+        a.back-link:hover { text-decoration: underline; }
+        .total-row td { font-weight: bold; background-color: #f1f1f1; }
+        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; transition: background-color 0.3s ease; }
+        button:hover { background-color: #0056b3; }
+        .invoice-link { text-align: right; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -99,26 +39,21 @@
     <p><strong>User:</strong> <?php echo $order['fullname'] ?></p>
     <p><strong>Order Date:</strong> <?php echo date('d M Y', strtotime($order['created_at'])) ?></p>
     <p><strong>Total:</strong> ₹<?php echo number_format($order['total'], 2) ?></p>
+
+    <!-- Return Status -->
     <?php if (isset($order['return_status'])): ?>
         <?php if ($order['return_status'] === 'approved'): ?>
-            <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
-                Your return request approved.
-            </div>
+            <div style="background:#28a745; color:white; padding:5px 10px; border-radius:4px;">Your return request approved.</div>
             <?php if (!empty($order['return_approve_comment'])): ?>
-                <div style="margin-top: 5px;">Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
+                <div>Approve Comment: <?php echo htmlspecialchars($order['return_approve_comment']) ?></div>
             <?php endif; ?>
         <?php elseif ($order['return_status'] === 'cancelled'): ?>
-            <div style="background: #dc3545; color: white; padding: 5px 10px; display: inline-block; border-radius: 4px;">
-                Your return request Cancelled.
-            </div>
+            <div style="background:#dc3545; color:white; padding:5px 10px; border-radius:4px;">Your return request Cancelled.</div>
             <?php if (!empty($order['return_cancel_comment'])): ?>
-                <div style="margin-top: 5px;">Cancelled Comment: <?php echo htmlspecialchars($order['return_cancel_comment']) ?></div>
+                <div>Cancelled Comment: <?php echo htmlspecialchars($order['return_cancel_comment']) ?></div>
             <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
-    <a href="<?php echo base_url('user/re_order') ?>">
-        <button type="button">Re-order</button>
-    </a>
 
     <h2>Order Details</h2>
 
@@ -135,91 +70,102 @@
             $grand_total = max($total - $discount - $wallet_used, 0);
         ?>
 
-    <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
         <?php
         $returnButton = false;
-
         if (isset($order['status']) && $order['status'] === 'Delivered' && !empty($order['delivered_at'])) {
             $deliveredAt = strtotime($order['delivered_at']);
             $now = time();
             $diffDays = ($now - $deliveredAt) / (60 * 60 * 24);
-        
-            if ($diffDays <= 2) { 
-                $returnButton = true;
-            }
+            if ($diffDays <= 2) { $returnButton = true; }
         }
         ?>
 
-        <?php if ($returnButton): ?>
-            <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
-                <button type="submit" onclick="return confirm('Are you sure you want to return this order?')">
-                    Return Order
-                </button>
-            </form>
-        <?php endif; ?>
+        <?php
+        $reorderButton = false;
+        if (isset($order['status']) && $order['status'] === 'Delivered' && !empty($order['delivered_at'])) {
+            $deliveredAt = strtotime($order['delivered_at']);
+            $now = time();
+            $diffDays = ($now - $deliveredAt) / (60 * 60 * 24);
+            if ($diffDays <= 2) { $reorderButton = true; }
+        }
+        ?>
+        <form method="post" action="<?php echo base_url('user/return_order/' . $order['id']) ?>">
+            <?php if ($returnButton): ?>
+    <button type="submit" id="returnBtn" onclick="return confirmReturn()">Return Selected</button>
+<?php endif; ?>
 
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="select_all"> All</th>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($items as $item): ?>
-                <tr>
-                    <td><input type="checkbox" name="return_items[]" value="<?php echo $item['id'] ?>"></td>
-                    <td><?php echo $item['name'] ?></td>
-                    <td><?php echo $item['qty'] ?></td>
-                    <td>₹<?php echo number_format($item['price'], 2) ?></td>
-                    <td>₹<?php echo number_format($item['qty'] * $item['price'], 2) ?></td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="total-row">
-                    <td></td>
-                    <td colspan="3"><strong>Total:</strong></td>
-                    <td><strong>₹<?php echo number_format($total, 2); ?></strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td></td>
-                    <td colspan="3"><strong>Discount:</strong></td>
-                    <td><strong>- ₹<?php echo number_format($discount, 2); ?></strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td></td>
-                    <td colspan="3"><strong>Wallet used:</strong></td>
-                    <td><strong>- ₹<?php echo number_format($wallet_used, 2); ?></strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td></td>
-                    <td colspan="3"><strong>Grand Total:</strong></td>
-                    <td><strong>₹<?php echo number_format($grand_total, 2); ?></strong></td>
-                </tr>
-            </tfoot>
-        </table>
+<?php if ($reorderButton): ?>
+    <button type="submit" id="reorderBtn" formaction="<?php echo base_url('user/re_order/' . $order['id']) ?>">Re-order Selected</button>
+<?php endif; ?>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select_all"> All</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($items as $item): ?>
+                    <tr>
+                        <td><input type="checkbox" name="return_items[]" value="<?php echo $item['id'] ?>"></td>
+                        <td><?php echo $item['name'] ?></td>
+                        <td><?php echo $item['qty'] ?></td>
+                        <td>₹<?php echo number_format($item['price'], 2) ?></td>
+                        <td>₹<?php echo number_format($item['qty'] * $item['price'], 2) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="total-row"><td></td><td colspan="3"><strong>Total:</strong></td><td><strong>₹<?php echo number_format($total, 2); ?></strong></td></tr>
+                    <tr class="total-row"><td></td><td colspan="3"><strong>Discount:</strong></td><td><strong>- ₹<?php echo number_format($discount, 2); ?></strong></td></tr>
+                    <tr class="total-row"><td></td><td colspan="3"><strong>Wallet used:</strong></td><td><strong>- ₹<?php echo number_format($wallet_used, 2); ?></strong></td></tr>
+                    <tr class="total-row"><td></td><td colspan="3"><strong>Grand Total:</strong></td><td><strong>₹<?php echo number_format($grand_total, 2); ?></strong></td></tr>
+                </tfoot>
+            </table>
+        </form>
 
         <div style="text-align: right; margin-top: 20px;">
             <button type="button" onclick="downloadPDF()">Download PDF</button>
         </div>
-    </form>
+    <?php endif; ?>
 </div>
+
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {
         const checkboxes = document.querySelectorAll('input[name="return_items[]"]:checked');
         if (checkboxes.length === 0) {
-            alert("Please select at least one item to return.");
+            alert("Please select at least one item.");
             e.preventDefault();
         }
     });
+
     document.getElementById('select_all').addEventListener('change', function () {
         const checked = this.checked;
         document.querySelectorAll('input[name="return_items[]"]').forEach(cb => cb.checked = checked);
     });
+
+    function confirmReturn() {
+        const checkboxes = document.querySelectorAll('input[name="return_items[]"]:checked');
+        if (checkboxes.length === 0) {
+            alert("Please select at least one item.");
+            return false;
+        }
+    
+        if (confirm('Are you sure you want to return selected items?')) {
+            document.getElementById("returnBtn").style.display = "none";
+            const reorderBtn = document.getElementById("reorderBtn");
+            if (reorderBtn) {
+                reorderBtn.style.display = "none";
+            }
+            return true; 
+        }
+        return false;
+    }
+
     async function downloadPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -298,8 +244,6 @@
         doc.save(`Order_Receipt_<?php echo $order['id']; ?>.pdf`);
     }
 </script>
-<?php endif; ?>
-
 </body>
 </html>
 <?php $this->load->view("user/footer"); ?>

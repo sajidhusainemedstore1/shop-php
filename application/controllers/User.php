@@ -251,7 +251,30 @@ class User extends CI_Controller {
         redirect('user/my_orders');
     }
 
-    public function re_order() {
-        
+    public function re_order($order_id) {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+    
+        $user_id = $this->session->userdata('user_id');
+    
+        $order_items = $this->order_model->get_order_items($order_id);
+    
+        if (!empty($order_items)) {
+            foreach ($order_items as $item) {
+                $cart_item = $this->cart_model->get_cart_item($user_id, $item['product_id']);
+                if ($cart_item) {
+                    $this->cart_model->increment_qty($user_id, $item['product_id'], $item['qty']);
+                } else {
+                    $this->cart_model->add_to_cart($user_id, $item['product_id'], $item['qty'], $item['price']);
+                }
+            }
+            $this->session->set_flashdata('success', 'Order products added to your cart successfully!');
+        } else {
+            $this->session->set_flashdata('error', 'No products found in this order.');
+        }
+    
+        redirect('shop/cart');
     }
+
 }

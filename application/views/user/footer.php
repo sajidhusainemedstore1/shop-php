@@ -103,7 +103,7 @@
         <h4>QUICK LINKS</h4>
         <ul>
           <li><a href="<?php echo base_url('user/my_orders')  ?>">My Orders</a></li>
-          <li><a href="<?php echo base_url('user/contactus')  ?>">Contact Us</a></li>
+          <li><a href="<?php echo base_url('user/send')  ?>">Contact Us</a></li>
           <li><a href="<?php echo base_url('#')  ?>">FAQ's</a></li>
         </ul>
       </div>

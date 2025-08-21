@@ -301,10 +301,6 @@ class User extends CI_Controller {
         $this->load->view('user/aboutus');
     }
 
-    public function contactus() {
-        $this->load->view('user/contactus');
-    }
-
     public function send() {
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');

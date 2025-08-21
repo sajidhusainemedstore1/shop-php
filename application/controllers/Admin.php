@@ -564,16 +564,18 @@ class Admin extends CI_Controller {
     }
 
     public function approve_return($order_id) {
-        $this->db->where('id', $order_id);
-        $this->db->update('orders', ['return_status' => 'approved']);
-        $this->session->set_flashdata('success', 'Return approved.');
+        $this->db->where('id', $order_id)->update('orders', [
+            'return_status' => 'approved'
+        ]);
+        $this->session->set_flashdata('success', 'Return request approved.');
         redirect('admin/order_detail/' . $order_id);
     }
 
     public function cancel_return($order_id) {
-        $this->db->where('id', $order_id);
-        $this->db->update('orders', ['return_status' => 'cancelled']);
-        $this->session->set_flashdata('success', 'Return cancelled.');
+        $this->db->where('id', $order_id)->update('orders', [
+            'return_status' => 'rejected'
+        ]);
+        $this->session->set_flashdata('error', 'Return request rejected.');
         redirect('admin/order_detail/' . $order_id);
     }
 

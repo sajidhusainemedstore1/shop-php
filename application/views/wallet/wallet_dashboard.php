@@ -11,7 +11,7 @@
             padding: 20px;
         }
         h2 {
-            color: #2c3e50;
+            color:#06979A;
             margin-bottom: 20px;
         }
         .search-box {

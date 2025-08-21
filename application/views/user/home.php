@@ -119,66 +119,6 @@
             }
         }
 
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        .nav-link {
-            display: inline-block;
-            text-decoration: none;
-            color: #06979A;
-            font-weight: bold;
-            margin-left: 15px;
-            padding: 6px 12px;
-            border: 1px solid #06979A;
-            border-radius: 4px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-    
-        .nav-link:hover {
-            background-color: #06979A;
-            color: white;
-        }
-    
-        .top-nav {
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 20px;
-            text-align: right;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    
-        .top-nav .nav-link {
-            text-decoration: none;
-            color: #06979A;
-            font-weight: bold;
-            margin-left: 15px;
-            padding: 6px 12px;
-            border: 1px solid #06979A;
-            border-radius: 4px;
-            transition: background 0.3s, color 0.3s;
-        }
-    
-        .top-nav .nav-link:hover {
-            background-color: #06979A;
-            color: white;
-        }
-    
-        .top-nav .cart-icon {
-            position: relative;
-            font-size: 18px;
-        }
-    
-
     </style>
 </head>
 <body>
@@ -200,23 +140,6 @@
         $cart_count = $this->cart_model->count_items($user_id);
     ?>
 
-    
-
-    <div>
-        <nav class="top-nav">
-            <?php if ($user_logged_in): ?>
-                <a href="<?php echo base_url('user/logout'); ?>" class="nav-link">Logout</a>
-                <a href="<?php echo base_url('user/view/' . $user_id) ?>" class="nav-link">Wallet History</a>
-                <a href="<?php echo base_url('user/my_orders'); ?>" class="nav-link">My Orders</a>
-                <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
-                </a>
-            <?php else: ?>
-                <a href="<?php echo base_url('user/login'); ?>" class="nav-link">Login</a>
-            <?php endif; ?>
-        </nav>
-    </div>
     <div class="container">
         <div class="products">
             <?php foreach ($products as $product): ?>

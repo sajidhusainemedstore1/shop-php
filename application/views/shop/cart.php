@@ -37,7 +37,7 @@
         }
 
         h2 {
-            color: #2c3e50;
+            color:#06979A;
             text-align: center;
             margin-bottom: 20px;
         }

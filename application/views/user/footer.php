@@ -1,40 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        footer {
-            position: relative;
-            background-color: #06979A;
-            color: white;
-            padding: 10px 20px;
-            height: 60px; /* adjust if needed */
-        }
-        
-        .footer-center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            font-weight: bold;
-        }
-        
-        footer h4{
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer Example</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-    </style>
+    footer {
+      background: #fff;
+      padding: 40px 20px 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+    }
+
+    .footer-column h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .footer-column h4::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #06a29a;
+      margin-top: 5px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column ul li {
+      margin: 8px 0;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .footer-column ul li a:hover {
+      color: #06a29a;
+    }
+
+    .footer-contact p {
+      font-size: 14px;
+      margin: 8px 0;
+      color: #333;
+    }
+
+    .footer-bottom {
+      background: #06979A;
+      color: #fff;
+      text-align: center;
+      padding: 12px 0;
+      margin: 0;
+      width: 100%;
+      left: 0;
+      right: 0;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <footer>
-            <div class="footer-center">
-                <h4><p> Copyright &copy; <?php echo date('Y') ?> Shop. All rights reserved.</p></h4>
-            </div>
-        </footer>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>POLICY INFO</h4>
+        <ul>
+          <li><a href="<?php echo base_url('user/aboutus')  ?>">About Us</a></li>
+          <li><a href="<?php echo base_url('#')  ?>">Privacy Policy</a></li>
+          <li><a href="<?php echo base_url('#')  ?>">Terms & Conditions</a></li>
+          <li><a href="<?php echo base_url('#')  ?>">Return Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="<?php echo base_url('user/my_orders')  ?>">My Orders</a></li>
+          <li><a href="<?php echo base_url('user/contactus')  ?>">Contact Us</a></li>
+          <li><a href="<?php echo base_url('#')  ?>">FAQ's</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column footer-contact">
+        <h4>CONTACT US</h4>
+        <p>🏠 A 121, Al Asbab Park socity, One Mart Road,<br>
+           Near MM Hotel, Juhapura, Ahmedabad, Gujarat 380009</p>
+        <p>📞 91932589650</p>
+        <p>✉️ admin.shopstore@gmail.com</p>
+      </div>
     </div>
+  </footer>
+
+  <div class="footer-bottom">
+    Copyright © <?php echo date("Y"); ?> <b>Shop</b>. All rights reserved.
+  </div>
+
 </body>
 </html>

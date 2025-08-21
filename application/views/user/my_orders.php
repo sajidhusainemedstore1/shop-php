@@ -16,7 +16,7 @@
 
 h2 {
     text-align: center;
-    color: #2c3e50;
+    color:#06979A;
     margin-bottom: 30px;
     font-weight: 700;
 }
@@ -38,7 +38,7 @@ thead {
 
 th, td {
     padding: 12px 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #06979A;
     text-align: center;
 }
 

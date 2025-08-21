@@ -11,7 +11,7 @@
         }
         h2 {
             margin-bottom: 10px;
-            color: #2c3e50;
+            color:#06979A;
         }
         table {
             width: 100%;

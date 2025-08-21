@@ -95,7 +95,7 @@
 
         <?php if ($reorderButton): ?>
             <button type="submit" id="reorderBtn" formaction="<?php echo base_url('use/re_order/' . $order['id']) ?>">Re-order Selected</button>
-        <?php endif; ?>r
+        <?php endif; ?>
 
             <table>
                 <thead>
@@ -153,18 +153,24 @@
             alert("Please select at least one item.");
             return false;
         }
-    
+
         if (confirm('Are you sure you want to return selected items?')) {
-            document.getElementById("returnBtn").style.display = "none";
+            // ✅ Hide Return button
+            const returnBtn = document.getElementById("returnBtn");
+            if (returnBtn) {
+                returnBtn.style.display = "none";
+            }
+
+            // ✅ Hide Reorder button if exists
             const reorderBtn = document.getElementById("reorderBtn");
             if (reorderBtn) {
                 reorderBtn.style.display = "none";
             }
-            return true; 
+
+            return true; // continue with form submit
         }
         return false;
     }
-
     async function downloadPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();

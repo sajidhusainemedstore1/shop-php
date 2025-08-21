@@ -13,7 +13,7 @@
         }
 
         h2, h3 {
-            color: #2c3e50;
+            color:#06979A;
         }
 
         table {

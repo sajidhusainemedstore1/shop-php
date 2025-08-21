@@ -252,13 +252,22 @@ class User extends CI_Controller {
     }
 
     public function request_return($order_id) {
-        $this->db->where('order_id', $order_id);
-        $this->db->update('order_items', ['return_status' => 'requested']);
+        $return_items = $this->input->post('return_items');
+        
+        if (empty($return_items)) {
+            $this->session->set_flashdata('error', 'Please select at least one item to return.');
+            redirect('user/order_details/'.$order_id);
+            return;
+        }
 
-        $this->db->where('id', $order_id);
-        $this->db->update('orders', ['return_status' => 'requested']);
+        $this->db->where_in('id', $return_items)
+                 ->where('order_id', $order_id)
+                 ->update('order_items', ['return_status' => 'requested']);
 
-        $this->session->set_flashdata('success', 'Return request submitted.');
+        $this->db->where('id', $order_id)
+                 ->update('orders', ['return_status' => 'requested']);
+
+        $this->session->set_flashdata('success', 'Return request submitted for selected items.');
         redirect('user/my_orders');
     }
 
@@ -288,4 +297,51 @@ class User extends CI_Controller {
         redirect('shop/cart');
     }
 
+    public function aboutus() {
+        $this->load->view('user/aboutus');
+    }
+
+    public function contactus() {
+        $this->load->view('user/contactus');
+    }
+
+    public function send() {
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('message', 'Message', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('user/contactus');
+        } else {
+            $recaptcha_response = $this->input->post('g-recaptcha-response');
+            $secret_key = $this->config->item('google_recaptcha_secret_key');
+            $user_ip = $this->input->ip_address();
+
+            $api_url = 'https://www.google.com/recaptcha/api/siteverify';
+            $post_data = array(
+                'secret'   => $secret_key,
+                'response' => $recaptcha_response,
+                'remoteip' => $user_ip
+            );
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $api_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            
+            $status = json_decode($response, true);
+
+            if ($status['success']) {
+                echo "Form submission successful! Email can be sent now.";
+            } else {
+                $error_message = 'reCAPTCHA verification failed. Please try again.';
+                $this->session->set_flashdata('recaptcha_error', $error_message);
+                
+                $this->load->view('user/contactus');
+            }
+        }
+    }
 }

@@ -65,7 +65,7 @@ tbody tr:hover {
 
 .btn:hover,
 .btn:focus {
-    background-color: #0056b3;
+    background-color: #1b7c6cff;
     outline: none;
 }
 

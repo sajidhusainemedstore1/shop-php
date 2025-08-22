@@ -121,7 +121,7 @@
     }
 
     .wallet-box {
-      background: #eafaf1;
+      background: #e3f2f3;
       padding: 12px;
       border-radius: 6px;
       color: #155724;

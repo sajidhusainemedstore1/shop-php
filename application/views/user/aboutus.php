@@ -19,7 +19,7 @@
 <body>
 <div class="container">
     <h2>About Us</h2>
-    <p>asaAt Shop Pvt Ltd, we are revolutionizing the healthcare landscape with our cutting-edge ePharmacy solutions. Established with a mission to make healthcare accessible and convenient, we bridge the gap between patients and pharmacies through our advanced digital platform.<h4>Our Vision</h4>
+    <p>At Shop Pvt Ltd, we are revolutionizing the healthcare landscape with our cutting-edge ePharmacy solutions. Established with a mission to make healthcare accessible and convenient, we bridge the gap between patients and pharmacies through our advanced digital platform.<h4>Our Vision</h4>
 To empower individuals with seamless access to essential medicines and health products, anytime and anywhere, ensuring a healthier, happier world. <h4>Our Services</h4>
 Our ePharmacy service offers a comprehensive range of medicines, healthcare products, and wellness items delivered directly to your doorstep. With just a few clicks, customers can upload their prescriptions, browse through an extensive catalog, and place orders with confidence. <h4>Why Choose Shop?</h4>
 <b>Wide Selection:</b> Access thousands of prescription and over-the-counter medicines from trusted brands.<br>

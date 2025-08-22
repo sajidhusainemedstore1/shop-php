@@ -64,7 +64,7 @@
     th, td {
         padding: 14px 16px;
         text-align: center;
-        border: 1px solid #ddd;
+        border: 1px solid #06979A;
         font-size: 0.95rem;
     }
 

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>User Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
             background-color: #f4f4f4;
@@ -34,7 +35,7 @@
         }
 
         input[type="submit"] {
-            width: 100%;
+            width: 35%;
             padding: 10px;
             background-color: #06979A;
             border: none;
@@ -48,6 +49,32 @@
             text-align: center;
             margin-bottom: 15px;
         }
+
+        a {
+            text-decoration: none;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            padding-right: 40px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .password-wrapper i {
+            position: absolute;
+            right: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+
     </style>
 </head>
 <body>
@@ -66,13 +93,26 @@
         </div>
         <div class="form-group">
             <label>Password:</label>
-            <input type="password" name="password" placeholder="Password" required />
+            <div class="password-wrapper">
+                <input type="password" name="password" id="id_password" placeholder="Password" required />
+                <i class="far fa-eye" id="togglePassword"></i>
+            </div>
         </div>
         <input type="submit" value="Login" />
-        <p>Don’t have an Account? <a href="<?php echo base_url('user/signup'); ?>">Signup here</a></p>
-
+        <p>Don’t have an Account? <a href="<?php echo base_url('user/signup'); ?>">Register Account</a></p>
     </form>
 </div>
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
 
+    togglePassword.addEventListener('click', function () {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 </html>

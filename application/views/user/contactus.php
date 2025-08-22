@@ -63,7 +63,7 @@
             margin-top: 15px;
         }
         .submit-btn {
-            background-color: #007bff;
+            background-color: #06979A;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -73,7 +73,7 @@
             margin-top: 20px;
         }
         .submit-btn:hover {
-            background-color: #0056b3;
+            background-color: #206368ff;
         }
         .map-container {
             flex: 1;

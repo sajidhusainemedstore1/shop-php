@@ -17,7 +17,7 @@
         h2 { color: #333; border-bottom: 2px solid #06979A; padding-bottom: 5px; margin-top: 30px; }
         p { font-size: 16px; line-height: 1.5; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th, td { border: 1px solid #06979A; padding: 10px; text-align: center; }
         th { background-color: #06979A; color: #fff; font-weight: 600; }
         td { font-size: 15px; }
         a.back-link { display: inline-block; margin-bottom: 10px; color: #06979A; font-size: 15px; }

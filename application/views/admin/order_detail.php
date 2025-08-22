@@ -46,7 +46,7 @@
     }
 
     th, td {
-        border: 1px solid #ddd;
+        border: 1px solid #06979A;
         padding: 12px 10px;
         text-align: center;
         font-size: 15px;
@@ -119,7 +119,7 @@
     }
     
     .btn-approve {
-        background-color: #06979A; /* Green */
+        background-color: #06979A;
     }
     
     .btn-approve:hover {
@@ -127,7 +127,7 @@
     }
     
     .btn-cancel {
-        background-color: #06979A; /* Red */
+        background-color: #06979A;
     }
     
     .btn-cancel:hover {
@@ -135,7 +135,7 @@
     }
     
     .back-link:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     /* Clearfix */

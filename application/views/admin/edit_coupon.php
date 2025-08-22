@@ -72,7 +72,7 @@
 
     p {
         margin: 10px 0;
-        color: red;
+        color: black06979A;
     }
 
     @media (max-width: 600px) {

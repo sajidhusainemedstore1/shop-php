@@ -89,8 +89,8 @@ p {
 
 .home-link:hover,
 .home-link:focus {
-    text-decoration: underline;
-    color: #00b386ff;
+    text-decoration: none;
+    color: #126450ff;
     outline: none;
 }
 .btn-1 {

@@ -14,7 +14,7 @@
     footer {
       background: #fff;
       padding: 40px 20px 0;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #06979A;
     }
 
     .footer-container {

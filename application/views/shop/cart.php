@@ -59,7 +59,7 @@
         th, td {
             padding: 15px 20px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #06979A;
         }
 
         tbody tr:hover {
@@ -96,7 +96,7 @@
         select.qty-select {
             padding: 6px 8px;
             border-radius: 4px;
-            border: 1px solid #ccc;
+            border: 1px solid #06979A;
             font-size: 1rem;
         }
 
@@ -150,7 +150,7 @@
 
             tbody tr {
                 margin-bottom: 20px;
-                background: #fff;
+                background: #06979A;
                 padding: 15px;
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);

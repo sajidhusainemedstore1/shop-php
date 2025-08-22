@@ -105,9 +105,11 @@ class User extends CI_Controller {
     }
 
     public function home() {
+        $user_id = $this->session->userdata('user_id');
         $data['products'] = $this->product_model->get_all_products();
         $data['user_logged_in'] = $this->session->userdata('user_logged_in') ? true : false;
         $data['admin_logged_in'] = $this->session->userdata('admin_logged_in') ? true : false;
+        $data['user'] = $this->user_model->get_user_by_id($user_id);
 
         $this->load->view('user/home', $data);
     }

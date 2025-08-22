@@ -101,7 +101,7 @@
                     <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
                 </a>
             <?php else: ?>
-                <a href="<?php echo base_url('user/login'); ?>" class="nav-link">Login</a>
+                <a href="<?php echo base_url('user/login'); ?>" class="nav-link">Sign in / Sign up</a>
             <?php endif; ?>
         </div>
     </header>

@@ -126,14 +126,14 @@
                 <textarea id="message" name="message" placeholder="Enquiry *" required></textarea>
             </div>
             <div class="recaptcha">
-                <?php if ($this->session->flashdata('recaptcha_error')): ?>
-    <div style="color: red; margin-top: 10px;">
-        <?php echo $this->session->flashdata('recaptcha_error'); ?>
-    </div>
-<?php endif; ?>
+                                <?php if ($this->session->flashdata('recaptcha_error')): ?>
+                    <div style="color: red; margin-top: 10px;">
+                        <?php echo $this->session->flashdata('recaptcha_error'); ?>
+                    </div>
+                <?php endif; ?>
 
-<label style="margin-top:20px;">Captcha Verification:</label>
-<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_recaptcha_site_key'); ?>"></div>
+                <label style="margin-top:20px;">Captcha Verification:</label>
+                <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_recaptcha_site_key'); ?>"></div>
             </div>
             <button type="submit" class="submit-btn">SEND MESSAGE</button>
         </form>
@@ -141,7 +141,7 @@
 
     <div class="map-container">
         <div class="map-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.878403961877!2d72.50774338022053!3d22.99149846386515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9ac93b950b23%3A0x53182fc10f757949!2sAl%20Asbab%20Park%2C%20D4%2C%20Al%20Asbab%20Society%2C%20Makarba%2C%20Ahmedabad%2C%20Gujarat%20380055!5e0!3m2!1sen!2sin!4v1755779028086!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d911.1903998405876!2d72.30292906955455!3d24.004194223776693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c8d626600d271%3A0x6a16dcb7c5653f46!2sImamvada!5e0!3m2!1sen!2sin!4v1755844795790!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </div>

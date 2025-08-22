@@ -53,7 +53,7 @@
 <body>
 
 <div class="login-container">
-    <h2>Users Login</h2>
+    <h2>Sign up to your Account</h2>
 
     <?php if (!empty($error)) : ?>
         <div class="error"><?php echo $error ?></div>

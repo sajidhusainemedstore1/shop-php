@@ -110,9 +110,8 @@
 
       <div class="footer-column footer-contact">
         <h4>CONTACT US</h4>
-        <p>🏠 A 121, Al Asbab Park socity, One Mart Road,<br>
-           Near MM Hotel, Juhapura, Ahmedabad, Gujarat 380009</p>
-        <p>📞 91932589650</p>
+        <p>🏠 2833+MCG, Rabari Colony, Kakoshi, Gujarat 384290</p>
+        <p>📞 916985632056</p>
         <p>✉️ admin.shopstore@gmail.com</p>
       </div>
     </div>

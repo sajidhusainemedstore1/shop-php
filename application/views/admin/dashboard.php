@@ -1,3 +1,4 @@
+<?php $this->load->view("admin/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,59 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
 
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-
-    .admin-dashboard {
-        display: flex;
-        min-height: 100vh;
-    }
-
-    .sidebar {
-        width: 220px;
-        background-color: #06979A;
-        color: white;
-        padding: 20px;
-    }
-
-    .sidebar h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .sidebar nav ul {
-        list-style: none;
-    }
-
-    .sidebar nav ul li {
-        margin: 15px 0;
-    }
-
-    .sidebar nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    .sidebar nav ul li a:hover {
-        color: #07434bff;
-    }
-
-    .main-content {
-        flex: 1;
-        padding: 30px;
-        background-color: #ecf0f1;
-    }
 
     header h1 {
         font-size: 28px;
@@ -103,23 +52,7 @@
 </style>
 </head>
 <body>
-    <div class="admin-dashboard">
-        <aside class="sidebar">
-            <h2>Admin Panel</h2>
-            <nav>
-                <ul>
-                    <li><a href="<?php echo base_url('admin/dashboard') ?>">Dashboard</a></li>
-                    <li><a href="<?php echo base_url('admin/userlist') ?>">Users</a></li>
-                    <li><a href="<?php echo base_url('admin/product_list') ?>">Products</a></li>
-                    <li><a href="<?php echo base_url('wallet/wallet_dashboard') ?>">Wallet</a></li>
-                    <li><a href="<?php echo base_url('admin/coupons') ?>">Promocode</a></li>
-                    <li><a href="<?php echo base_url('admin/order_list') ?>">Customer Orders</a></li>
-                    <li><a href="<?php echo base_url('admin/logout') ?>">Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="main-content">
+        <main class="container">
             <header>
                 <h1>Welcome to the Admin Dashboard</h1>
                 <p>Total Users: <?php echo $total_users ?> | Total Products: <?php echo $total_products ?> | Total Coupons: <?php echo $total_coupons?></p>  
@@ -137,3 +70,4 @@
     </div>
 </body>
 </html>
+<?php $this->load->view("admin/footer"); ?>

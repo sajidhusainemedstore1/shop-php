@@ -106,27 +106,27 @@
 <div class="container">
     <div class="contact-form-container">
         <h2>Contact Us</h2>
-        <form action="#" method="POST">
+        <form method="POST" action="<?php echo base_url('user/send'); ?>">
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Name" >
+                    <input type="text" id="name" name="name" placeholder="Name" required>
                 </div>
                 <div class="form-group">
                     <label for="mobile">Mobile</label>
-                    <input type="tel" id="mobile" name="mobile" placeholder="Mobile">
+                    <input type="tel" id="mobile" name="mobile" placeholder="Mobile" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" placeholder="Enquiry *" required></textarea>
             </div>
             <div class="recaptcha">
-                                <?php if ($this->session->flashdata('recaptcha_error')): ?>
+                    <?php if ($this->session->flashdata('recaptcha_error')): ?>
                     <div style="color: red; margin-top: 10px;">
                         <?php echo $this->session->flashdata('recaptcha_error'); ?>
                     </div>

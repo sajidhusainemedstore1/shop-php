@@ -310,6 +310,18 @@ class User extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('user/contactus');
         } else {
+            $name = $this->input->post('name');
+            $mobile = $this->input->post('mobile');
+            $email = $this->input->post('email');
+            $message = $this->input->post('message');
+            
+            $this->db->insert('contactus', [
+                'name' => $name,
+                'mobile' => $mobile,
+                'email' => $email,
+                'message' => $message,
+            ]);
+        
             $recaptcha_response = $this->input->post('g-recaptcha-response');
             $secret_key = $this->config->item('google_recaptcha_secret_key');
             $user_ip = $this->input->ip_address();
@@ -333,10 +345,8 @@ class User extends CI_Controller {
 
             if ($status['success']) {
                 echo "Form submission successful! Email can be sent now.";
+                $this->load->view('user/contactus');
             } else {
-                $error_message = 'reCAPTCHA verification failed. Please try again.';
-                $this->session->set_flashdata('recaptcha_error', $error_message);
-                
                 $this->load->view('user/contactus');
             }
         }

@@ -50,7 +50,6 @@ class User extends CI_Controller {
     }
 
     public function signup() {
-        $this->load->library('form_validation');
 
         $this->form_validation->set_rules('fullname', 'Fullname', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');

@@ -27,7 +27,7 @@ INSERT INTO `addresses` (`id`, `user_id`, `name`, `mobile`, `email`, `address`, 
 (6,	1,	'ssi',	'08956485620',	'ab@gmail.com',	'S-9,10, 2nd Floor, Ayush Plaza, Jail Rd, opposite Sir T. Hospital, Bhavnagar, Gujarat 364002',	'Ahmedabad',	'gujarat',	'300670',	1,	'2025-07-24 14:58:16'),
 (7,	1,	'Sajid',	'968563210',	'ssi@gmail.com',	'Motavas, nearby sagar hotel, main bazar',	'Kakoshi',	'gujarat',	'384290',	0,	'2025-07-24 14:58:51'),
 (10,	8,	'jafar',	'08956485620',	'ab@gmail.com',	'S-9,10, 2nd Floor, Ayush Plaza, Jail Rd, opposite Sir T. Hospital, Bhavnagar, Gujarat 364002',	'Ahmedabad',	'gujarat',	'300670',	1,	'2025-08-19 11:58:42'),
-(11,	8,	'Sajid',	'09328500920',	'sajidali@gmail.com',	'jgjkhgkjgkjg',	'hgiugigig',	'jggigiugigu',	'123123',	0,	'2025-08-20 11:56:15');
+(11,	8,	'Sajid',	'06328500910',	'sajidali@gmail.com',	'jgjkhgkjgkjg',	'hgiugigig',	'jggigiugigu',	'123123',	0,	'2025-08-20 11:56:15');
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
@@ -465,7 +465,7 @@ INSERT INTO `user` (`id`, `fullname`, `email`, `mobile`, `password`, `image`, `w
 (8,	'Jafarali',	'ja5@gmal.com',	'7890456780',	'87878787',	'android-chrome-192x192.png',	0.00),
 (11,	'Safdar',	'sf@gmail.com',	'9870965780',	'88888888',	'logo1.jpg',	100.00),
 (13,	'sss',	'ss@gmail.com',	'8956489560',	'22222222',	'47454.png',	10.00),
-(14,	'Sajid',	'sss@gmail.com',	'09328500920',	'22222222',	'Screenshot_from_2025-08-19_15-23-57.png',	0.00);
+(14,	'Sajid',	'sss@gmail.com',	'06328500910',	'22222222',	'Screenshot_from_2025-08-19_15-23-57.png',	0.00);
 
 DROP TABLE IF EXISTS `wallet_transactions`;
 CREATE TABLE `wallet_transactions` (

@@ -93,9 +93,9 @@
         <h4>POLICY INFO</h4>
         <ul>
           <li><a href="<?php echo base_url('user/aboutus')  ?>">About Us</a></li>
-          <li><a href="<?php echo base_url('#')  ?>">Privacy Policy</a></li>
-          <li><a href="<?php echo base_url('#')  ?>">Terms & Conditions</a></li>
-          <li><a href="<?php echo base_url('#')  ?>">Return Policy</a></li>
+          <li><a href="<?php echo base_url('')  ?>">Privacy Policy</a></li>
+          <li><a href="<?php echo base_url('')  ?>">Terms & Conditions</a></li>
+          <li><a href="<?php echo base_url('')  ?>">Return Policy</a></li>
         </ul>
       </div>
 
@@ -104,7 +104,7 @@
         <ul>
           <li><a href="<?php echo base_url('user/my_orders')  ?>">My Orders</a></li>
           <li><a href="<?php echo base_url('user/send')  ?>">Contact Us</a></li>
-          <li><a href="<?php echo base_url('#')  ?>">FAQ's</a></li>
+          <li><a href="<?php echo base_url('')  ?>">FAQ's</a></li>
         </ul>
       </div>
 

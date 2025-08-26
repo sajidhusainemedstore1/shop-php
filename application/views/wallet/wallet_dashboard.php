@@ -13,6 +13,7 @@
         h2 {
             color:#06979A;
             margin-bottom: 20px;
+            text-align: center;
         }
         .search-box {
             margin-bottom: 10px;

@@ -10,17 +10,9 @@
         margin: 0;
         padding: 0;
     }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9f9f9;
-        color: #333;
-        line-height: 1.6;
-    }
-
+    
     h2 {
         text-align: center;
-        margin: 40px 0 20px;
         font-size: 2em;
         color: #333;
     }
@@ -88,7 +80,7 @@
     }
 
     a:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     .no-orders {

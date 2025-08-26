@@ -10,6 +10,9 @@
             width: 100%;
             margin-top: 20px;
         }
+        h1 {
+            text-align: center;
+        }
         th, td {
             border: 1px solid #06979A;
             padding: 8px 12px;
@@ -39,15 +42,15 @@
             background-color: #06979A;
         }
         .action-buttons {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
-.action-buttons a.button {
-    flex: 1;
-    text-align: center;
-}
+        .action-buttons a.button {
+            flex: 1;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -55,8 +58,7 @@
         <p style="color:green;"><?php echo $this->session->flashdata('success'); ?></p>
     <?php endif; ?>
 
-    <h1>Coupons List</h1><br>
-
+    <h1>Coupons List</h1>
     <a href="<?php echo base_url('admin/add_coupon'); ?>" class="button">Add New Coupon</a>
 
     <table>

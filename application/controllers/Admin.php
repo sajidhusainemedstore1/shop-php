@@ -573,9 +573,9 @@ class Admin extends CI_Controller {
 
     public function cancel_return($order_id) {
         $this->db->where('id', $order_id)->update('orders', [
-            'return_status' => 'rejected'
+            'return_status' => 'cancelled'
         ]);
-        $this->session->set_flashdata('error', 'Return request rejected.');
+        $this->session->set_flashdata('error', 'Return request cancelled.');
         redirect('admin/order_detail/' . $order_id);
     }
 

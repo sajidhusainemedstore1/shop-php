@@ -37,10 +37,9 @@
 <body>
 
 <h2>User: <?php echo htmlspecialchars($user['fullname']) ?></h2>
-<p>Email: <?php echo htmlspecialchars($user['email']) ?></p>
 <p>Wallet Balance: ₹<?php echo number_format((float)$user['wallet_balance'], 2) ?></p>
 
-<h3>Transaction History</h3>
+<h3>Wallet History</h3>
 <table>
     <thead>
         <tr>

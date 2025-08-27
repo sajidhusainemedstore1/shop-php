@@ -187,7 +187,7 @@
                     <div class="popup-content">
                 <a href="<?php echo base_url('user/view/' . $user_id) ?>" class="nav-link">💳 Wallet History</a>
                         <a href="<?= base_url('user/my_orders'); ?>">📦 My Orders</a>
-                        <a href="<?= base_url('logout'); ?>">🚪 Logout</a>
+                        <a href="<?= base_url('user/logout'); ?>">🚪 Logout</a>
                     </div>
                 </div>
             </div>

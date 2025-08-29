@@ -11,13 +11,13 @@
         
         <?php if ($this->session->flashdata('success')): ?>
             <div class="alert alert-success" role="alert">
-                <?= $this->session->flashdata('success'); ?>
+                <?php echo $this->session->flashdata('success'); ?>
             </div>
         <?php endif; ?>
         
         <?php if ($this->session->flashdata('error')): ?>
             <div class="alert alert-danger" role="alert">
-                <?= $this->session->flashdata('error'); ?>
+                <?php echo $this->session->flashdata('error'); ?>
             </div>
         <?php endif; ?>
         
@@ -38,41 +38,41 @@
                     foreach ($cart_items as $item): 
                         $total += $item['subtotal']; 
                 ?>
-                <tr data-id="<?= $item['id']; ?>" data-price="<?= $item['price']; ?>">
-                    <td data-label="Name"><?= $item['name']; ?></td>
+                <tr data-id="<?php echo $item['id']; ?>" data-price="<?php echo $item['price']; ?>">
+                    <td data-label="Name"><?php echo $item['name']; ?></td>
                     <td data-label="Qty">
-                        <label for="qty-<?= $item['id']; ?>" class="sr-only">Quantity</label>
-                        <select id="qty-<?= $item['id']; ?>" class="qty-select" data-id="<?= $item['id']; ?>">
+                        <label for="qty-<?php echo $item['id']; ?>" class="sr-only">Quantity</label>
+                        <select id="qty-<?php echo $item['id']; ?>" class="qty-select" data-id="<?php echo $item['id']; ?>">
                             <?php for ($i = 1; $i <= 99; $i++): ?>
-                                <option value="<?= $i; ?>" <?= ($item['qty'] == $i) ? 'selected' : ''; ?>>
-                                    <?= $i; ?>
+                                <option value="<?php echo $i; ?>" <?php echo ($item['qty'] == $i) ? 'selected' : ''; ?>>
+                                    <?php echo $i; ?>
                                 </option>
                             <?php endfor; ?>
                         </select>
                     </td>
-                    <td data-label="Price">₹<?= number_format($item['price'], 2); ?></td>
-                    <td data-label="Subtotal" class="subtotal">₹<?= number_format($item['subtotal'], 2); ?></td>
+                    <td data-label="Price">₹<?php echo number_format($item['price'], 2); ?></td>
+                    <td data-label="Subtotal" class="subtotal">₹<?php echo number_format($item['subtotal'], 2); ?></td>
                     <td data-label="Actions">
-                        <a href="<?= base_url('shop/remove_item/' . $item['id']); ?>" 
-                           class="btn btn-danger" aria-label="Remove <?= $item['name']; ?>">Remove</a>
+                        <a href="<?php echo base_url('shop/remove_item/' . $item['id']); ?>" 
+                           class="btn btn-danger" aria-label="Remove <?php echo $item['name']; ?>">Remove</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
                             
-            <p><strong>Total:</strong> <span id="total-price">₹<?= number_format($total, 2); ?></span></p>
-            <p><strong>Final Total:</strong> <span id="final-total">₹<?= number_format($total, 2); ?></span></p>
+            <p><strong>Total:</strong> <span id="total-price">₹<?php echo number_format($total, 2); ?></span></p>
+            <p><strong>Final Total:</strong> <span id="final-total">₹<?php echo number_format($total, 2); ?></span></p>
                             
             <div class="checkout-actions">
-                <a href="<?= base_url('checkout'); ?>" class="btn btn-1">
+                <a href="<?php echo base_url('checkout'); ?>" class="btn btn-1">
                     Proceed to Checkout
                 </a>
             </div>
                             
         <?php else: ?>
             <p>Your cart is empty.</p>
-            <a href="<?= base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
+            <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
         <?php endif; ?>
     </div>
     <script>

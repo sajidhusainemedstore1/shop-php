@@ -123,6 +123,7 @@
             padding: 8px 12px;
             border: 1px solid #ccc;
             border-radius: 4px 0 0 4px;
+            max-width : 70%;
         }
         .search-box button {
             background: #06979A;
@@ -172,13 +173,11 @@
 </head>
 <body>
 
-<!-- Top Bar -->
 <div class="top-bar">
     <span>Customer Support: <strong>919429691060</strong></span>
     <div>
-        <!-- <a href="#">OFFERS</a> -->
+        <a href="">OFFERS</a>
         <?php if ($user_logged_in): ?>
-            <!-- Account popup when logged in -->
             <div class="account-container">
                 <button class="account-btn" onclick="togglePopup()">
                     <i class="fa fa-user"></i> My Account <i class="fa fa-caret-down"></i>
@@ -192,7 +191,6 @@
                 </div>
             </div>
         <?php else: ?>
-            <!-- Only login/signup when not logged in -->
             <a href="<?php echo base_url('user/login'); ?>">
                 <i class="fa fa-user"></i> Sign in / Sign up
             </a>
@@ -200,36 +198,36 @@
     </div>
 </div>
 
-<!-- Main Header -->
 <div class="main-header">
-    <!-- Logo -->
     <div class="logo-area">
         <a href="<?php echo base_url(); ?>">
             <img src="<?php echo base_url('assets/images/medical-logo.png'); ?>" alt="Logo">
         </a>
     </div>
 
-    <!-- Menu -->
-    <!-- <div class="menu">
-        <a href="#"><i class="fas fa-pills"></i> Medicines</a>
-        <a href="#"><i class="fas fa-vials"></i> Lab Tests</a>
-        <a href="#"><i class="fas fa-user-md"></i> Find Doctors</a>
-    </div> -->
+    <div class="menu">
+        <a href=""><i class="fas fa-pills"></i> Medicines</a>
+        <a href=""><i class="fas fa-vials"></i> Lab Tests</a>
+        <a href=""><i class="fas fa-user-md"></i> Find Doctors</a>
+    </div>
 
-    <!-- Search -->
     <div class="search-box">
         <input type="text" placeholder="Search for medicine & wellness products...">
         <button><i class="fas fa-search"></i></button>
     </div>
 
-    <!-- Actions -->
     <div class="header-actions">
         <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
             <i class="fas fa-shopping-cart"></i>
             <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
         </a>
-        <!-- <a href="#" class="upload-btn">Upload RX</a> -->
+        <a href="" class="upload-btn">Upload RX</a>
     </div>
+</div>
+
+<div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+ background:rgba(255,255,255,0.8); z-index:9999; display:flex; align-items:center; justify-content:center;">
+   <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
 </div>
 
 <script>
@@ -237,10 +235,10 @@ function togglePopup() {
     const popup = document.getElementById("accountPopup");
     popup.style.display = (popup.style.display === "block") ? "none" : "block";
 }
-// Close popup when clicking outside
 window.onclick = function(event) {
     if (!event.target.closest(".account-container")) {
         document.getElementById("accountPopup").style.display = "none";
     }
 }
+
 </script>

@@ -242,25 +242,25 @@
         }
     }
 
-   function filterProducts() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const products = document.querySelectorAll(".product-card");
-
-    if (input.length < 3) {
-        products.forEach(p => p.style.display = "");
-        return;
+    function filterProducts() {
+        const input = document.getElementById("searchInput").value.toLowerCase();
+        const products = document.querySelectorAll(".product-card");
+        
+        if (input.length < 3) {
+            products.forEach(p => p.style.display = "");
+            return;
+        }
+    
+        products.forEach(p => {
+            const text = p.innerText.toLowerCase();
+            p.style.display = text.includes(input) ? "" : "none";
+        });
     }
-
-    products.forEach(p => {
-        const text = p.innerText.toLowerCase();
-        p.style.display = text.includes(input) ? "" : "none";
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+            searchInput.addEventListener("keyup", filterProducts);
+        }
     });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("searchInput");
-    if (searchInput) {
-        searchInput.addEventListener("keyup", filterProducts);
-    }
-});
 </script>

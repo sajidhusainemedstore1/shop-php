@@ -231,14 +231,14 @@
 </div>
 
 <script>
-function togglePopup() {
-    const popup = document.getElementById("accountPopup");
-    popup.style.display = (popup.style.display === "block") ? "none" : "block";
-}
-window.onclick = function(event) {
-    if (!event.target.closest(".account-container")) {
-        document.getElementById("accountPopup").style.display = "none";
+    function togglePopup() {
+        const popup = document.getElementById("accountPopup");
+        popup.style.display = (popup.style.display === "block") ? "none" : "block";
     }
-}
-
+    
+    window.onclick = function(event) {
+        if (!event.target.closest(".account-container")) {
+            document.getElementById("accountPopup").style.display = "none";
+        }
+    }
 </script>

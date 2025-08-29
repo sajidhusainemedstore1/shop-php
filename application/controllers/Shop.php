@@ -374,4 +374,15 @@ class Shop extends CI_Controller {
         redirect('shop/cart');
     }
 
+    public function get_cart_count() {
+    $user_id = $this->session->userdata('user_id');
+
+    // If not logged in → cart count = 0
+    $count = $user_id ? $this->cart_model->count_items($user_id) : 0;
+
+    $this->output
+         ->set_content_type('application/json')
+         ->set_output(json_encode(['count' => $count]));
+}
+
 }

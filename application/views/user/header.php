@@ -212,8 +212,8 @@
     </div>
 
     <div class="search-box">
-        <input type="text" placeholder="Search for medicine & wellness products...">
-        <button><i class="fas fa-search"></i></button>
+        <input type="search" id="searchInput" onkeyup="filterTable()">
+        <button onclick="filterTable()"><i class="fas fa-search"></i></button>
     </div>
 
     <div class="header-actions">
@@ -241,4 +241,26 @@
             document.getElementById("accountPopup").style.display = "none";
         }
     }
+
+   function filterProducts() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const products = document.querySelectorAll(".product-card");
+
+    if (input.length < 3) {
+        products.forEach(p => p.style.display = "");
+        return;
+    }
+
+    products.forEach(p => {
+        const text = p.innerText.toLowerCase();
+        p.style.display = text.includes(input) ? "" : "none";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+        searchInput.addEventListener("keyup", filterProducts);
+    }
+});
 </script>

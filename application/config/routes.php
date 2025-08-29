@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'user/home';
 $route['preview_order'] = 'shop/preview_order';
 $route['user/return_order/(:num)'] = 'user/return_order/$1';
+$route['get_cart_count'] = 'shop/get_cart_count';
 // $route['admin/login'] = 'admin/login';
 // $route['admin/login_check'] = 'admin/login_check'; 
 // $route['admin/login_action'] = 'admin/login_action';

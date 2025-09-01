@@ -113,4 +113,3 @@
 
 </body>
 </html>
-<?php $this->load->view("admin/footer"); ?>

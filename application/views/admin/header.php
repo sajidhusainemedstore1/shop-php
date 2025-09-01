@@ -2,7 +2,6 @@
 <html>
 <head>
     <title><?php echo isset($page_title) ? $page_title : 'Admin Dashboard' ?></title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/admin.css') ?>">
 <style>
     * {
     margin: 0;
@@ -92,8 +91,8 @@ body {
 footer {
     text-align: center;
     padding: 10px;
-    background: #fff;
-    border-top: 1px solid #ccc;
+    background: #06979a;
+    border-top: 1px solid #06979a;
     margin-top: 30px;
 }
 

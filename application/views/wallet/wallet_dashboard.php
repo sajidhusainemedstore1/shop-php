@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f6f9;
+            background: #06979a;
             padding: 20px;
         }
         h2 {
@@ -21,7 +21,7 @@
         input[type="search"] {
             padding: 8px;
             width: 250px;
-            border: 1px solid #ccc;
+            border: 1px solid #06979a;
             border-radius: 4px;
         }
         table {

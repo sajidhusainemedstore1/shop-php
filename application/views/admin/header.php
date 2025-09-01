@@ -123,3 +123,42 @@ footer {
         </nav>
     </aside>
     <main class="main-content">
+        <div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+ background:rgba(255,255,255,0.8); z-index:9999; display:flex; align-items:center; justify-content:center;">
+   <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function togglePopup() {
+        const popup = document.getElementById("accountPopup");
+        popup.style.display = (popup.style.display === "block") ? "none" : "block";
+    }
+    
+    window.onclick = function(event) {
+        if (!event.target.closest(".account-container")) {
+            document.getElementById("accountPopup").style.display = "none";
+        }
+    }
+
+    function filterProducts() {
+        const input = document.getElementById("searchInput").value.toLowerCase();
+        const products = document.querySelectorAll(".product-card");
+        
+        if (input.length < 3) {
+            products.forEach(p => p.style.display = "");
+            return;
+        }
+    
+        products.forEach(p => {
+            const text = p.innerText.toLowerCase();
+            p.style.display = text.includes(input) ? "" : "none";
+        });
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+            searchInput.addEventListener("keyup", filterProducts);
+        }
+    });
+</script>

@@ -125,20 +125,9 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(function(){
-        document.querySelector("#loader").style.display = "none";
-    }, 1200);
-});
-
-// $(document).ajaxStart(function(){
-//     $("#loader").css("display","flex"); 
-// });
-
-$(document).ajaxStop(function(){
-    setTimeout(function(){
-        $("#loader").css("display","none");
-    }, 1200);
-});
-
+  document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function(){
+          document.querySelector("#loader").style.display = "none";
+      }, 1200);
+  });
 </script>

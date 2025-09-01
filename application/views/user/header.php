@@ -205,11 +205,11 @@
         </a>
     </div>
 
-    <div class="menu">
+    <!-- <div class="menu">
         <a href=""><i class="fas fa-pills"></i> Medicines</a>
         <a href=""><i class="fas fa-vials"></i> Lab Tests</a>
         <a href=""><i class="fas fa-user-md"></i> Find Doctors</a>
-    </div>
+    </div> -->
 
     <div class="search-box">
         <input type="search" id="searchInput" onkeyup="filterTable()">
@@ -217,10 +217,18 @@
     </div>
 
     <div class="header-actions">
-        <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
-        </a>
+        <?php if ($user_logged_in): ?>
+            <a href="<?php echo base_url('shop/cart'); ?>" class="nav-link cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count-badge" class="cart-badge"><?php echo $cart_count; ?></span>
+            </a>
+        <?php else: ?>
+            <a href="<?php echo base_url('user/home'); ?>" class="nav-link cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count-badge" class="cart-badge">0</span>
+            </a>
+        <?php endif; ?>
+
         <a href="" class="upload-btn">Upload RX</a>
     </div>
 </div>
@@ -229,7 +237,7 @@
  background:rgba(255,255,255,0.8); z-index:9999; display:flex; align-items:center; justify-content:center;">
    <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function togglePopup() {
         const popup = document.getElementById("accountPopup");

@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Checkout securely on MyShop. Choose payment method, apply coupons, and place your order.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
   <style>
     .container {
@@ -225,19 +227,18 @@
         $wallet_base = $sub_total - $discount;
         $wallet_use_amount = round(($wallet_percentage / 100) * $wallet_base, 2);
         $wallet_use_amount = min($wallet_use_amount, $user['wallet_balance']);
-
     }
     $data['wallet_use_amount'] = $wallet_use_amount;
   ?>
 
   <h2>CHECKOUT</h2>
   <?php if ($this->session->flashdata('success')): ?>
-    <div class="alert alert-success">
+    <div class="alert alert-success" role="alert">
       <?php echo $this->session->flashdata('success'); ?>
     </div>
   <?php endif; ?>
   <?php if ($this->session->flashdata('error')): ?>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" role="alert">
       <?php echo $this->session->flashdata('error'); ?>
     </div>
   <?php endif; ?>
@@ -245,17 +246,17 @@
   <div class="checkout-grid">
     <div>
       <div class="card">
-        <h3>Item in your cart required Prescription</h3>
+        <h3>Item in your cart requires a Prescription</h3>
         <div class="radio-box">
-          <label>
-            <input type="radio" name="prescription" value="no" checked>
+          <label for="presc-no">
+            <input type="radio" id="presc-no" name="prescription" value="no" checked>
             I don't have a prescription
-            <small> doctors will consult you without charges for your order.</small>
+            <small>Doctors will consult you without charges for your order.</small>
           </label>
-          <label>
-            <input type="radio" name="prescription" value="yes">
-            I have prescription
-            <small>Our pharmacist will dispense medicines only if the prescription is valid & it meets all government regulations.</small>
+          <label for="presc-yes">
+            <input type="radio" id="presc-yes" name="prescription" value="yes">
+            I have a prescription
+            <small>Our pharmacist will dispense medicines only if the prescription is valid & meets all government regulations.</small>
           </label>
         </div>
       </div>
@@ -265,12 +266,14 @@
         <?php if (!empty($addresses)): ?>
           <?php foreach ($addresses as $addr): ?>
             <div class="address-card">
-              <input type="radio" name="address_id" value="<?php echo $addr['id']; ?>" <?php echo $addr['is_default'] ? 'checked' : ''; ?>><br>
-              <strong>Mobile:</strong> <?php echo htmlspecialchars($addr['mobile']); ?><br>
-              <strong>Email:</strong> <?php echo htmlspecialchars($addr['email']); ?><br>
-              <strong>Address:</strong> <?php echo nl2br(htmlspecialchars($addr['address'])); ?>,
-              <?php echo htmlspecialchars($addr['city']); ?>, <?php echo htmlspecialchars($addr['state']); ?> -
-              <?php echo htmlspecialchars($addr['pincode']); ?>
+              <label>
+                <input type="radio" name="address_id" value="<?php echo $addr['id']; ?>" <?php echo $addr['is_default'] ? 'checked' : ''; ?>>
+                <strong>Mobile:</strong> <?php echo htmlspecialchars($addr['mobile']); ?><br>
+                <strong>Email:</strong> <?php echo htmlspecialchars($addr['email']); ?><br>
+                <strong>Address:</strong> <?php echo nl2br(htmlspecialchars($addr['address'])); ?>,
+                <?php echo htmlspecialchars($addr['city']); ?>, <?php echo htmlspecialchars($addr['state']); ?> -
+                <?php echo htmlspecialchars($addr['pincode']); ?>
+              </label>
               <?php if ($addr['is_default']): ?>
                 <div class="address-default">Default</div>
               <?php endif; ?>
@@ -280,10 +283,10 @@
               </div>
             </div>
           <?php endforeach; ?>
-          <div class="add-new-box" onclick="window.location.href='<?php echo base_url('user/add_address'); ?>'">+ Add new address</div>
+          <div class="add-new-box" role="button" tabindex="0" onclick="window.location.href='<?php echo base_url('user/add_address'); ?>'">+ Add new address</div>
         <?php else: ?>
           <p>No delivery address found.</p>
-          <div class="add-new-box" onclick="window.location.href='<?php echo base_url('user/add_address'); ?>'">+ Add Address</div>
+          <div class="add-new-box" role="button" tabindex="0" onclick="window.location.href='<?php echo base_url('user/add_address'); ?>'">+ Add Address</div>
         <?php endif; ?>
       </div>
     </div>
@@ -291,8 +294,9 @@
     <div>
       <div class="summary-section">
         <h3>Apply Coupons</h3>
-        <form action="<?php echo base_url('checkout/apply_coupon'); ?>" method="post">
-          <input type="text" name="coupon_code" placeholder="Enter Promocode" style="width: 90%; padding: 8px; border-radius: 5px;">
+        <form action="<?php echo base_url('checkout/apply_coupon'); ?>" method="post" autocomplete="off">
+          <label for="coupon_code" class="sr-only">Coupon Code</label>
+          <input type="text" id="coupon_code" name="coupon_code" placeholder="Enter Promocode" autocomplete="off" style="width: 90%; padding: 8px; border-radius: 5px;">
           <br><br>
           <button type="submit" class="btn">Apply Promocode</button>
         </form>
@@ -347,11 +351,13 @@
 
       <div class="card delivery-option">
         <h3>Delivery Type</h3>
-        <label><input type="radio" name="delivery_type" value="home" checked> Home Delivery</label>
+        <label for="delivery-home">
+          <input type="radio" id="delivery-home" name="delivery_type" value="home" checked> Home Delivery
+        </label>
       </div>
 
       <div class="summary-section">
-        <form action="<?php echo base_url('checkout/preview_order'); ?>" method="post">
+        <form action="<?php echo base_url('checkout/preview_order'); ?>" method="post" autocomplete="off">
           <!-- Hidden fields for wallet + prescription + delivery type -->
           <input type="hidden" name="prescription" value="">
           <input type="hidden" name="delivery_type" value="">
@@ -362,8 +368,7 @@
       </div>
     </div>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const walletCheckbox = document.getElementById("wallet_checkbox"); 

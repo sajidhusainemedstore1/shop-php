@@ -148,6 +148,7 @@ p {
                 <th>Total</th>
                 <th>Payment Status</th>
                 <th>Date</th>
+                <th>Delivery Date</th>
                 <th>Status</th>
                 <th>Order Details</th>
             </tr>
@@ -159,6 +160,15 @@ p {
                 <td>₹<?php echo number_format($order['paid_amount'], 2) ?></td>
                 <td><?php echo $order['status'] ?></td>
                 <td><?php echo date('d M Y H:i A', strtotime($order['created_at'])) ?></td>
+                <td>
+                    <?php 
+                    if (!empty($order['delivered_at'])) {
+                        echo date('d M Y h:i A', strtotime($order['delivered_at']));
+                    } else {
+                        echo '';
+                    }
+                    ?>
+                </td>
                 <td>
                     <?php if (isset($order['return_status'])): ?>
                         <?php if ($order['return_status'] === 'approved'): ?>

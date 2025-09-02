@@ -477,6 +477,7 @@ class Admin extends CI_Controller {
                 'expiry_time' => $this->input->post('expiry_time', true),
                 'active' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
+                'delivered_at' => date('Y-m-d H:i:s'),
             ];
 
             $this->db->insert('coupons', $data);

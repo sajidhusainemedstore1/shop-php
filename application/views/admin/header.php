@@ -122,10 +122,9 @@ footer {
         </nav>
     </aside>
     <main class="main-content">
-        <div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
- background:rgba(255,255,255,0.8); z-index:9999; display:flex; align-items:center; justify-content:center;">
-   <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
-</div>
+        <div id="loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:9999; display:flex; align-items:center; justify-content:center;">
+           <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
+        </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function togglePopup() {

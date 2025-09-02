@@ -140,6 +140,7 @@
                     <th>Payment Method</th>
                     <th>Payment Status</th>
                     <th>Order Date</th>
+                    <th>Delivery Date</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -153,6 +154,15 @@
                             <td data-label="Payment Method"><?php echo $order['payment_method'] ?></td>
                             <td data-label="Payment Status"><?php echo $order['status']  ?></td>
                             <td data-label="Order Date"><?php echo date('d M Y', strtotime($order['created_at'])) ?></td>
+                            <td>
+                                <?php 
+                                if (!empty($order['delivered_at'])) {
+                                    echo date('d M Y h:i A', strtotime($order['delivered_at']));
+                                } else {
+                                    echo '';
+                                }
+                                ?>
+                            </td>
                             <td>
                                 <?php if (isset($order['return_status'])): ?>
                                     <?php if ($order['return_status'] === 'approved'): ?>

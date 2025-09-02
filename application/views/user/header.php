@@ -205,11 +205,11 @@
         </a>
     </div>
 
-    <!-- <div class="menu">
+    <div class="menu">
         <a href=""><i class="fas fa-pills"></i> Medicines</a>
         <a href=""><i class="fas fa-vials"></i> Lab Tests</a>
         <a href=""><i class="fas fa-user-md"></i> Find Doctors</a>
-    </div> -->
+    </div>
 
     <div class="search-box">
         <input type="search" id="searchInput" onkeyup="filterTable()">

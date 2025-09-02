@@ -213,7 +213,7 @@
 
     <div class="search-box">
         <input type="search" id="searchInput" onkeyup="filterTable()">
-        <button name="search" onclick="filterTable()"><i class="fas fa-search"></i>Searchz</button>
+        <button name="search" onclick="filterTable()"><i class="fas fa-search"></i>Search</button>
     </div>
 
     <div class="header-actions">

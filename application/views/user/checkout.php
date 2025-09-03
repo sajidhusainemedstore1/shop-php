@@ -344,7 +344,7 @@
 
           <div class="wallet-box">
             You have ₹<?php echo number_format($user['wallet_balance'], 2) ?> in your wallet.
-            You can save up to <?php echo number_format($wallet_percentage, 0) ?>% of your cart value using wallet cash.
+            You can save up to <?php echo number_format($wallet_percentage, 1) ?>% of your cart value using wallet cash.
           </div>
         <?php endif; ?>
       </div>

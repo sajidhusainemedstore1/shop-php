@@ -113,8 +113,7 @@ class Wallet extends CI_Controller {
     }
 
     public function update_wallet_percentage() {
-        $this->load->database();
-        $percentage = (int)$this->input->post('wallet_percentage');
+        $percentage = (float)$this->input->post('wallet_percentage');
 
         if ($percentage < 0 || $percentage > 40) {
             $this->session->set_flashdata('error', 'Invalid percentage value.');

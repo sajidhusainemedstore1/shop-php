@@ -1,3 +1,4 @@
+<?php $this->load->view("admin/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
         <style>
-        body {
+        .container {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -31,7 +32,7 @@
             background: #fff;
             padding: 25px 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px #333;
             max-width: 350px;
             width: 100%;
         }
@@ -74,41 +75,42 @@
         }
 
         .submit-btn:hover {
-            background-color: #218838;
+            background-color: #1b5e5fff;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <?php if (isset($error)) echo '<p class="error-msg">' . $error . '</p>'; ?>
 
-<?php if (isset($error)) echo '<p class="error-msg">' . $error . '</p>'; ?>
+        <form class="product-form" method="post" action="<?php echo base_url('admin/save_product') ?>" enctype="multipart/form-data">
+            <h2 class="form-title">Add Product</h2>
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
 
-<form class="product-form" method="post" action="<?php echo base_url('admin/save_product') ?>" enctype="multipart/form-data">
-    <h2 class="form-title">Add Product</h2>
-    <div class="form-group">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="description" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="number" step="0.01" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label>Image:</label>
+                <input type="file" name="image" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add Product" class="submit-btn">
+            </div>
+
+        </form>
     </div>
-
-    <div class="form-group">
-        <label>Description:</label>
-        <textarea name="description" rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label>Price:</label>
-        <input type="number" step="0.01" name="price" required>
-    </div>
-
-    <div class="form-group">
-        <label>Image:</label>
-        <input type="file" name="image" required>
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Add Product" class="submit-btn">
-    </div>
-    
-</form>
-
 </body>
 </html>
+<?php $this->load->view("admin/footer"); ?>

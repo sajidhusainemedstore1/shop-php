@@ -19,12 +19,12 @@
         .banner-slider {
             position: relative;
             width: 100%;
-            max-width: 1400px;
+            max-width: 1480px;
             height: 300px;
             margin: 20px auto 20px;
             overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            /* border-radius: 10px; */
+            /* box-shadow: 0 4px 12px rgba(0,0,0,0.2);   */
         }
 
         .banner-slide {
@@ -226,7 +226,7 @@
             <?php endforeach; ?>
         </div>
     </div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             let slides = document.querySelectorAll('.banner-slide');

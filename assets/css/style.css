@@ -36,7 +36,7 @@ body{
 }
 img{max-width:100%;height:auto;display:block}
 a{color:var(--brand-600);text-decoration:none}
-a:hover{text-decoration:underline}
+a:hover{text-decoration:none}
 .container{
   width:min(1100px, 92%);
   margin-inline:auto;
@@ -220,7 +220,7 @@ label{font-weight:600;margin-top:6px;display:inline-block}
 }
 .product-card h3{font-size:16px;margin:8px 0 6px}
 .price{font-weight:800}
-.price .mrp{color:var(--muted);text-decoration:line-through;margin-left:6px}
+.price .mrp{color:var(--muted);text-decoration:none;margin-left:6px}
 .badge{
   display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;
   background:var(--brand-50);color:var(--brand-700);

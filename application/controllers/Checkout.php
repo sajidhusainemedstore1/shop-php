@@ -41,7 +41,7 @@ class Checkout extends CI_Controller {
 
     public function place_order() {
         $user_id = $this->session->userdata('user_id');
-        $payment_method = $this->input->post('payment_method'); // COD / Online
+        $payment_method = $this->input->post('payment_method');
         
         $order_data = [
             'user_id'        => $user_id,
@@ -50,7 +50,7 @@ class Checkout extends CI_Controller {
             'dis_amount'     => $this->session->userdata('discount'),
             'wallet_used'    => $this->session->userdata('wallet_used'),
             'paid_amount'    => $this->session->userdata('final_total'),
-            'payment_method' => $payment_method,   // ✅ Now will be COD or Online
+            'payment_method' => $payment_method,
             'status'         => 'pending',
             'created_at'     => date('Y-m-d H:i:s'),
         ];
@@ -58,7 +58,6 @@ class Checkout extends CI_Controller {
         $this->db->insert('orders', $order_data);
         $order_id = $this->db->insert_id();
     
-        // Redirect to thank you / payment gateway
         if ($payment_method == 'Online') {
             redirect('payment_gateway/start/'.$order_id);
         } else {
@@ -207,7 +206,7 @@ class Checkout extends CI_Controller {
             'delivery_charge' => $delivery_charge,
             'final_total'     => $final_total,
             'address'         => $address,
-            'all_addresses'   => $this->address_model->get_addresses($user_id) // ✅ Added
+            'all_addresses'   => $this->address_model->get_addresses($user_id)
         ];
 
         $this->load->view('user/preview_order', $data);

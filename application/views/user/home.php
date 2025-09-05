@@ -16,6 +16,61 @@
             padding: 0;
         }
 
+        .banner-slider {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            height: 300px;
+            margin: 20px auto 20px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .banner-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner-slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .active-slide {
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        .banner-note {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
         .alert {
             width: 100%;
             max-width: 1200px;
@@ -102,23 +157,20 @@
         }
 
         @media (max-width: 992px) {
-            .product-card {
-                width: calc(33.333% - 20px);
-            }
+            .product-card { width: calc(33.333% - 20px); }
         }
 
         @media (max-width: 768px) {
-            .product-card {
-                width: calc(50% - 20px);
-            }
+            .product-card { width: calc(50% - 20px); }
+            .banner-slider { height: 200px; }
+            .banner-slide img { height: 200px; }
         }
 
         @media (max-width: 480px) {
-            .product-card {
-                width: 100%;
-            }
+            .product-card { width: 100%; }
+            .banner-slider { height: 150px; }
+            .banner-slide img { height: 150px; }
         }
-
     </style>
 </head>
 <body>
@@ -133,6 +185,24 @@
             <?php echo $this->session->flashdata('error'); ?>
         </div>
     <?php endif; ?>
+
+    <div class="banner-slider">
+        <div class="banner-slide active-slide">
+            <img src="<?php echo base_url('uploads/banner1.jpg'); ?>" alt="Banner 1">
+        </div>
+        <div class="banner-slide">
+            <img src="<?php echo base_url('uploads/banner2.jpg'); ?>" alt="Banner 2">
+        </div>
+        <div class="banner-slide">
+            <img src="<?php echo base_url('uploads/banner3.jpg'); ?>" alt="Banner 3">
+        </div>
+        <div class="banner-slide">
+            <img src="<?php echo base_url('uploads/banner4.jpg'); ?>" alt="Banner 4">
+        </div>
+
+        <button class="slider-btn prev-btn">&#10094;</button>
+        <button class="slider-btn next-btn">&#10095;</button>
+    </div>
 
     <?php
         $user_id = $this->session->userdata('user_id');
@@ -159,37 +229,58 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.add-to-cart-form').forEach(form => {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const formData = new FormData(this);
-                
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: new URLSearchParams(formData),
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        const badge = document.getElementById('cart-count-badge');
-                        if (data.cart_count !== undefined) {
-                            badge.textContent = data.cart_count;
-                            badge.style.display = 'inline-block';
-                        }
-                    
-                        const msg = document.createElement('div');
-                        msg.className = 'alert ' + (data.success ? 'alert-success' : 'alert-danger');
-                        msg.textContent = data.message || data.error || 'Unexpected response';
-                        document.body.insertBefore(msg, document.body.firstChild);
-                    
-                        setTimeout(() => msg.remove(), 3000);
-                    })
-                    .catch(err => {
-                        console.error('AJAX error:', err);
-                        alert('Something went wrong. Try logging in again.');
-                    });
+            let slides = document.querySelectorAll('.banner-slide');
+            let current = 0;
+
+            const showSlide = (index) => {
+                slides.forEach(s => s.classList.remove('active-slide'));
+                slides[index].classList.add('active-slide');
+            };
+
+            document.querySelector('.prev-btn').addEventListener('click', () => {
+                current = (current === 0) ? slides.length - 1 : current - 1;
+                showSlide(current);
+            });
+
+            document.querySelector('.next-btn').addEventListener('click', () => {
+                current = (current === slides.length - 1) ? 0 : current + 1;
+                showSlide(current);
+            });
+
+            setInterval(() => {
+                current = (current === slides.length - 1) ? 0 : current + 1;
+                showSlide(current);
+            }, 5000);
+        });
+
+        document.querySelectorAll('.add-to-cart-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: new URLSearchParams(formData),
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const badge = document.getElementById('cart-count-badge');
+                    if (data.cart_count !== undefined) {
+                        badge.textContent = data.cart_count;
+                        badge.style.display = 'inline-block';
+                    }
+
+                    const msg = document.createElement('div');
+                    msg.className = 'alert ' + (data.success ? 'alert-success' : 'alert-danger');
+                    msg.textContent = data.message || data.error || 'Unexpected response';
+                    document.body.insertBefore(msg, document.body.firstChild);
+
+                    setTimeout(() => msg.remove(), 3000);
+                })
+                .catch(err => {
+                    console.error('AJAX error:', err);
+                    alert('Something went wrong. Try logging in again.');
                 });
             });
         });

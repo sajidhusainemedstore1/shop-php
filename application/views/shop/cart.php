@@ -3,7 +3,119 @@
 <html>
 <head>
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cart-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #06979A;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table th {
+            background: #f1f3f5;
+            color: #444;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        table td {
+            font-size: 15px;
+            color: #555;
+        }
+
+        .qty-select {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .subtotal {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            font-size: 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-1 {
+            background: #06979A;
+            color: #fff;
+            border: none;
+        }
+        .btn-1:hover {
+            background: #0b7779ff;
+        }
+
+        .checkout-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        p strong {
+            color: #333;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
 </head>
 <body>
     <div class="container cart-container">
@@ -75,7 +187,8 @@
             <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
         <?php endif; ?>
     </div>
-    <script>
+    
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             function updateTotal() {
                 let total = 0;

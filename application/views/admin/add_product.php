@@ -1,4 +1,3 @@
-<?php $this->load->view("admin/header"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

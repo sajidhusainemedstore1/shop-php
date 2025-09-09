@@ -74,7 +74,7 @@
         }
 
         .btn-confirm:hover {
-            background-color: #0056b3;
+            background-color: #217677ff;
         }
 
         .remark-input {
@@ -100,97 +100,97 @@
 </head>
 <body>
 
-<div class="preview-box">
     <h2>PREVIEW ORDER</h2>
+    <div class="preview-box">
 
-    <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
-        <div class="section">
-            <!-- Address Section -->
-            <div class="address">
-                <h4>Delivery Address</h4>
-                <p><strong>Name:</strong> <?php echo !empty($address['name']) ? $address['name'] : '' ?></p>
-                <p><strong>Mobile No:</strong> <?php echo !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
-                <p><strong>Email:</strong> <?php echo !empty($address['email']) ? $address['email'] : '' ?></p>
-                <p><strong>Address:</strong>
-                    <?php if (!empty($address)): ?>
-                        <?php echo $address['address'] ?>, <?php echo $address['city'] ?>, <?php echo $address['state'] ?> - <?php echo $address['pincode'] ?>
-                    <?php else: ?>
-                        No default address found.
+        <form id="confirm-order-form" method="post" action="<?php echo base_url('shop/buy') ?>">
+            <div class="section">
+                <!-- Address Section -->
+                <div class="address">
+                    <h4>Delivery Address</h4>
+                    <p><strong>Name:</strong> <?php echo !empty($address['name']) ? $address['name'] : '' ?></p>
+                    <p><strong>Mobile No:</strong> <?php echo !empty($address['mobile']) ? $address['mobile'] : '' ?></p>
+                    <p><strong>Email:</strong> <?php echo !empty($address['email']) ? $address['email'] : '' ?></p>
+                    <p><strong>Address:</strong>
+                        <?php if (!empty($address)): ?>
+                            <?php echo $address['address'] ?>, <?php echo $address['city'] ?>, <?php echo $address['state'] ?> - <?php echo $address['pincode'] ?>
+                        <?php else: ?>
+                            No default address found.
+                        <?php endif; ?>
+                    </p>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="payment">
+                    <h4>Payment Type</h4>
+                    <label>
+                        <input type="radio" name="payment_method" value="COD" checked> COD
+                    </label>
+                    <label style="margin-left: 20px;">
+                        <input type="radio" name="payment_method" value="Online"> Pay Online
+                    </label>
+                </div>
+            </div>
+
+            <!-- Cart Items -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($cart_items)): ?>
+                        <?php foreach ($cart_items as $item): ?>
+                            <tr>
+                                <td><?php echo $item['name'] ?></td>
+                                <td><?php echo $item['qty'] ?></td>
+                                <td>₹<?php echo number_format($item['price'], 2) ?></td>
+                                <td>₹<?php echo number_format($item['subtotal'], 2) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endif; ?>
-                </p>
-            </div>
+                </tbody>
+            </table>
 
-            <!-- Payment Section -->
-            <div class="payment">
-                <h4>Payment Type</h4>
-                <label>
-                    <input type="radio" name="payment_method" value="COD" checked> COD
-                </label>
-                <label style="margin-left: 20px;">
-                    <input type="radio" name="payment_method" value="Online"> Pay Online
-                </label>
-            </div>
-        </div>
-
-        <!-- Cart Items -->
-        <table>
-            <thead>
+            <!-- Order Summary -->
+            <table class="summary">
                 <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <td>Sub Total:</td>
+                    <td>₹<?php echo number_format($subtotal, 2) ?></td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($cart_items)): ?>
-                    <?php foreach ($cart_items as $item): ?>
-                        <tr>
-                            <td><?php echo $item['name'] ?></td>
-                            <td><?php echo $item['qty'] ?></td>
-                            <td>₹<?php echo number_format($item['price'], 2) ?></td>
-                            <td>₹<?php echo number_format($item['subtotal'], 2) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+
+                <?php if (!empty($discount) && $discount > 0): ?>
+                <tr>
+                    <td>Promocode Discount:</td>
+                    <td>- ₹<?php echo number_format($discount, 2) ?></td>
+                </tr>
                 <?php endif; ?>
-            </tbody>
-        </table>
 
-        <!-- Order Summary -->
-        <table class="summary">
-            <tr>
-                <td>Sub Total:</td>
-                <td>₹<?php echo number_format($subtotal, 2) ?></td>
-            </tr>
+                <?php if ($this->session->userdata('use_wallet') && !empty($wallet_amount) && $wallet_amount > 0): ?>
+                <tr>
+                    <td>Wallet Used:</td>
+                    <td>- ₹<?php echo number_format($wallet_amount, 2) ?></td>
+                </tr>
+                <?php endif; ?>
 
-            <?php if (!empty($discount) && $discount > 0): ?>
-            <tr>
-                <td>Promocode Discount:</td>
-                <td>- ₹<?php echo number_format($discount, 2) ?></td>
-            </tr>
-            <?php endif; ?>
+                <tr>
+                    <td>Delivery Charges:</td>
+                    <td>+ ₹<?php echo number_format($delivery_charge ?? 0, 2) ?></td>
+                </tr>
 
-            <?php if ($this->session->userdata('use_wallet') && !empty($wallet_amount) && $wallet_amount > 0): ?>
-            <tr>
-                <td>Wallet Used:</td>
-                <td>- ₹<?php echo number_format($wallet_amount, 2) ?></td>
-            </tr>
-            <?php endif; ?>
+                <tr class="total-row">
+                    <td>Total Amount:</td>
+                    <td>₹<?php echo number_format($final_total, 2) ?></td>
+                </tr>
+            </table>
 
-            <tr>
-                <td>Delivery Charges:</td>
-                <td>+ ₹<?php echo number_format($delivery_charge ?? 0, 2) ?></td>
-            </tr>
-
-            <tr class="total-row">
-                <td>Total Amount:</td>
-                <td>₹<?php echo number_format($final_total, 2) ?></td>
-            </tr>
-        </table>
-
-        <button type="submit" class="btn-confirm">Confirm Order</button>
-    </form>
-</div>
+            <button type="submit" class="btn-confirm">Confirm Order</button>
+        </form>
+    </div>
 
 </body>
 </html>

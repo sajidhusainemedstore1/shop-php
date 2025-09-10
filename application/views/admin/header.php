@@ -129,30 +129,36 @@ footer {
 <script>
     function togglePopup() {
         const popup = document.getElementById("accountPopup");
-        popup.style.display = (popup.style.display === "block") ? "none" : "block";
-    }
-    
-    window.onclick = function(event) {
-        if (!event.target.closest(".account-container")) {
-            document.getElementById("accountPopup").style.display = "none";
+        if (popup) {
+            popup.style.display = (popup.style.display === "block") ? "none" : "block";
         }
     }
 
+    window.addEventListener("click", function(event) {
+        const popup = document.getElementById("accountPopup");
+        if (popup && !event.target.closest(".account-container")) {
+            popup.style.display = "none";
+        }
+    });
+
     function filterProducts() {
-        const input = document.getElementById("searchInput").value.toLowerCase();
+        const input = document.getElementById("searchInput");
+        if (!input) return;
+
+        const query = input.value.toLowerCase();
         const products = document.querySelectorAll(".product-card");
-        
-        if (input.length < 3) {
+
+        if (query.length < 3) {
             products.forEach(p => p.style.display = "");
             return;
         }
-    
+
         products.forEach(p => {
             const text = p.innerText.toLowerCase();
-            p.style.display = text.includes(input) ? "" : "none";
+            p.style.display = text.includes(query) ? "" : "none";
         });
     }
-    
+
     document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("searchInput");
         if (searchInput) {

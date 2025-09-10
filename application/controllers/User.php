@@ -351,4 +351,24 @@ class User extends CI_Controller {
             }
         }
     }
+
+    public function prescription_upload() {
+        $data['my_prescriptions'] = $this->Prescription_model->get_by_user($this->session->userdata('user_id'));
+        $this->load->view('user/prescription_upload', $data);
+    }
+    
+    public function save_prescription() {
+    
+    }
+    
+    public function select_prescription($id) {
+        $this->session->set_userdata('selected_prescription', $id);
+        redirect('checkout');
+    }
+    
+    public function remove_prescription() {
+        $this->session->unset_userdata('selected_prescription');
+        redirect('checkout');
+    }
+
 }

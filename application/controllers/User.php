@@ -353,14 +353,42 @@ class User extends CI_Controller {
     }
 
     public function prescription_upload() {
-        $data['my_prescriptions'] = $this->Prescription_model->get_by_user($this->session->userdata('user_id'));
-        $this->load->view('user/prescription_upload', $data);
-    }
-    
+    $data['my_prescriptions'] = $this->prescription_model->get_by_user($this->session->userdata('user_id'));
+    $this->load->view('user/prescription_upload', $data);
+}
+
     public function save_prescription() {
-    
+    $user_id = $this->session->userdata('user_id');
+
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+    $config['max_size'] = 8192;
+
+    // create folder if not exists
+    if (!is_dir($config['upload_path'])) {
+        mkdir($config['upload_path'], 0777, TRUE);
     }
-    
+
+    $this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload('prescription_file')) {
+        $this->session->set_flashdata('error', $this->upload->display_errors());
+        redirect('user/prescription_upload');
+    } else {
+        $upload_data = $this->upload->data();
+        $file_name = $upload_data['file_name'];
+
+        // Save to DB
+        $this->prescription_model->insert([
+            'user_id' => $user_id,
+            'file' => $file_name
+        ]);
+
+        $this->session->set_flashdata('success', 'Prescription uploaded successfully!');
+        redirect('user/prescription_upload');
+    }
+}
+
     public function select_prescription($id) {
         $this->session->set_userdata('selected_prescription', $id);
         redirect('checkout');

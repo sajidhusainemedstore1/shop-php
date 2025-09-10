@@ -187,7 +187,7 @@ $data['wallet_use_amount'] = $wallet_use_amount;
 $selected_prescription_id = $this->session->userdata('selected_prescription');
 $selected_prescription = null;
 if ($selected_prescription_id) {
-  $selected_prescription = $this->Prescription_model->get($selected_prescription_id);
+  $selected_prescription = $this->prescription_model->get($selected_prescription_id);
 }
 ?>
 
@@ -223,7 +223,7 @@ if ($selected_prescription_id) {
         </div>
         <?php if(!empty($selected_prescription)): ?>
             <div style="text-align:center;">
-                <img src="<?php echo base_url('uploads/prescriptions/'.$selected_prescription['file']); ?>" 
+                <img src="<?php echo base_url('uploads/'.$selected_prescription['file']); ?>" 
                      alt="Prescription" class="prescription-thumb">
                 <br>
                 <a href="<?php echo base_url('user/remove_prescription'); ?>" style="color:red;font-weight:bold;">Remove</a>
@@ -266,7 +266,6 @@ if ($selected_prescription_id) {
   </div>
 
   <div>
-    <!-- Coupon section -->
     <div class="summary-section">
       <h3>Apply Coupons</h3>
       <form action="<?php echo base_url('checkout/apply_coupon'); ?>" method="post" autocomplete="off">
@@ -281,7 +280,6 @@ if ($selected_prescription_id) {
       <?php endif; ?>
     </div><br>
 
-    <!-- Shopping Cart Summary -->
     <div class="summary-section">
       <h3>Shopping Cart</h3>
       <div class="summary-line">
@@ -322,7 +320,6 @@ if ($selected_prescription_id) {
       <?php endif; ?>
     </div>
 
-    <!-- Delivery Type -->
     <div class="card delivery-option">
       <h3>Delivery Type</h3>
       <label for="delivery-home">
@@ -330,7 +327,6 @@ if ($selected_prescription_id) {
       </label>
     </div>
 
-    <!-- Preview Order -->
     <div class="summary-section">
       <form action="<?php echo base_url('checkout/preview_order'); ?>" method="post" autocomplete="off">
         <input type="hidden" name="prescription" value="">

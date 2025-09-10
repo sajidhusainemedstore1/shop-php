@@ -91,8 +91,8 @@ body {
 footer {
     text-align: center;
     padding: 10px;
-    background: #06979a;
-    border-top: 1px solid #06979a;
+    background: #06979A;
+    border-top: 1px solid #06979A;
     margin-top: 30px;
 }
 

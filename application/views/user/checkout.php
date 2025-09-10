@@ -226,7 +226,7 @@ if ($selected_prescription_id) {
                 <img src="<?php echo base_url('uploads/'.$selected_prescription['file']); ?>" 
                      alt="Prescription" class="prescription-thumb">
                 <br>
-                <a href="<?php echo base_url('user/remove_prescription'); ?>" style="color:red;font-weight:bold;">Remove</a>
+                <a href="<?php echo base_url('user/remove_prescription'); ?>" style="color:red;font-weight:bold;text-decoration:none;">Remove</a>
             </div>
         <?php else: ?>
             <p style="color:red;text-align:center;">No Prescription Selected</p>

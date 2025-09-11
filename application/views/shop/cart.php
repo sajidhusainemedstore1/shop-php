@@ -61,7 +61,7 @@
 
         .subtotal {
             font-weight: bold;
-            color: #007bff;
+            color: #06979A;
         }
 
         .btn {

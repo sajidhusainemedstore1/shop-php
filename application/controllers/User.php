@@ -364,10 +364,6 @@ class User extends CI_Controller {
         $config['allowed_types'] = 'jpg|jpeg|png|pdf';
         $config['max_size'] = 8192;
 
-        if (!is_dir($config['upload_path'])) {
-            mkdir($config['upload_path'], 0777, TRUE);
-        }
-
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('prescription_file')) {

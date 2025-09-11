@@ -156,6 +156,10 @@
             background-color: rgb(29, 151, 160);
         }
 
+        h2 {
+            color: #06979A;
+        }
+
         @media (max-width: 992px) {
             .product-card { width: calc(33.333% - 20px); }
         }
@@ -209,8 +213,9 @@
         $user_logged_in = $this->session->userdata('user_logged_in');
         $cart_count = $this->cart_model->count_items($user_id);
     ?>
-
     <div class="container">
+        <h2>Popular Products</h2>
+        <hr>
         <div class="products">
             <?php foreach ($products as $product): ?>
                 <div class="product-card">

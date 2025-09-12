@@ -143,7 +143,15 @@
         .cart-icon {
             position: relative;
             font-size: 20px;
-            color: #06979A;
+            /* color: #06979A; */
+            background: #06979A;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
         }
         .cart-badge {
             position: absolute;

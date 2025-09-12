@@ -69,7 +69,7 @@ tbody tr:hover {
     outline: none;
 }
 
-p {
+h4 {
     text-align: center;
     font-size: 1.1em;
     margin-top: 40px;
@@ -137,7 +137,7 @@ p {
 <h2>My Orders</h2>
 
 <?php if (empty($orders)): ?>
-    <p>You have not placed any orders yet.</p>
+    <h4>You have not placed any orders yet.</h4>
     <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
 <?php else: ?>
     <a href="<?php echo base_url('user/home') ?>" class="home-link"> Home page</a>

@@ -184,7 +184,7 @@
                             
         <?php else: ?>
             <p>Your cart is empty.</p>
-            <a href="<?php echo base_url('user/home'); ?>" class="btn-1">Go to Shop</a>
+            <a href="<?php echo base_url('user/home'); ?>" class="btn btn-1">Go to Shop</a>
         <?php endif; ?>
     </div>
     

@@ -143,7 +143,6 @@
         .cart-icon {
             position: relative;
             font-size: 20px;
-            /* color: #06979A; */
             background: #06979A;
             color: #fff;
             padding: 8px 16px;
@@ -155,13 +154,13 @@
         }
         .cart-badge {
             position: absolute;
-            top: -8px;
-            right: -10px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 50%;
+            top: 1px;
+            right: 3px;
+            background: white;
+            color: #06979A;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 100%;
             font-weight: bold;
         }
         .upload-btn {

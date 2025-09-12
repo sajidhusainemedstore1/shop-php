@@ -83,6 +83,10 @@
       left: 0;
       right: 0;
     }
+
+    a {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -112,7 +116,7 @@
         <h4>CONTACT US</h4>
         <p>🏠 2833+MCG, Rabari Colony, Kakoshi, Gujarat 384290</p>
         <p>📞 916985632056</p>
-        <p>✉️ admin.shopstore@gmail.com</p>
+        <a href="mailto:sajidhusainsunasara78@gmail.com"><p>✉️ admin.shopstore@gmail.com</p></a>
       </div>
     </div>
   </footer>
